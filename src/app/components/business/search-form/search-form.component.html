@@ -6,6 +6,7 @@
   fxLayoutGap="20px"
 >
   <mat-form-field>
+    <mat-label>Localization</mat-label>
     <input
       matInput
       type="text"
@@ -13,8 +14,12 @@
       name="Localization"
       formControlName="localization"
     />
+    <mat-error *ngIf="searchForm?.get('localization')?.hasError('required')">
+      Required
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
+    <mat-label>Name</mat-label>
     <input
       matInput
       type="text"

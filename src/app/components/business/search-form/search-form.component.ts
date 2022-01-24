@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SearchFormValue } from 'src/app/models/search-value.model';
 import { SearchType } from 'src/app/models/type.model';
 
@@ -21,14 +21,19 @@ export class SearchFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.onSearch$.emit(this.searchForm.value);
+    if (this.searchForm.valid) {
+      this.onSearch$.emit(this.searchForm.value);
+    }
   }
 
   initSearchForm() {
-    this.searchForm = this.formBuilder.group({
-      localization: ['Gdansk'],
-      bussinesName: [''],
-      types: [[]],
-    });
+    this.searchForm = this.formBuilder.group(
+      {
+        localization: ['', Validators.required],
+        bussinesName: [''],
+        types: [[]],
+      },
+      { updateOn: 'submit' }
+    );
   }
 }
