@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BusinessesModel } from 'src/app/models/business.model';
 import { SearchType } from 'src/app/models/type.model';
 
 @Component({
@@ -7,6 +8,8 @@ import { SearchType } from 'src/app/models/type.model';
   styleUrls: ['./search-screen.component.css'],
 })
 export class SearchScreenComponent implements OnInit {
+  businesses: BusinessesModel[] = [];
+
   types: SearchType[] = [
     {
       name: 'Pizza',
@@ -44,7 +47,16 @@ export class SearchScreenComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initMockBusinesses();
+  }
+
+  initMockBusinesses() {
+    const business: Partial<BusinessesModel> = { name: 'Test' };
+    for (let i = 0; i <= 6; i++) {
+      this.businesses.push(business as BusinessesModel);
+    }
+  }
 
   handleOnSearch(searchFormValue: any) {
     console.log('searchFormValue: ', searchFormValue);
