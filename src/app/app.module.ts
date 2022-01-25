@@ -19,6 +19,7 @@ import { SearchScreenComponent } from './screens/search-screen/search-screen.com
 import { BusinessListComponent } from './components/business/business-list/business-list.component';
 import { BusinessCardComponent } from './components/business/business-card/business-card.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatButtonModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
