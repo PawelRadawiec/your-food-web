@@ -4,7 +4,14 @@
 ></app-search-form>
 
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Pizza">
+  businessResults
+  <div *ngFor="let result of businessResults | keyvalue">
+    <mat-tab [label]="result.value.params.term">
+      <app-business-list [businesses]="result.value.businesses"></app-business-list
+    ></mat-tab>
+  </div>
+
+  <!-- <mat-tab label="Pizza">
     <app-business-list [businesses]="businesses"></app-business-list
   ></mat-tab>
   <mat-tab label="Burger">
@@ -21,5 +28,5 @@
   ></mat-tab>
   <mat-tab label="Fish">
     <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab>
+  ></mat-tab> -->
 </mat-tab-group>

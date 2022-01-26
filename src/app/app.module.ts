@@ -20,6 +20,9 @@ import { BusinessListComponent } from './components/business/business-list/busin
 import { BusinessCardComponent } from './components/business/business-card/business-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { BusinessState } from './state/business/business.state';
+import { NgxsModule } from '@ngxs/store';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,9 +48,12 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatSelectModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    HttpClientModule,
+    NgxsModule.forRoot([BusinessState], {
+      developmentMode: true,
+    }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

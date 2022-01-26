@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { BusinessesModel } from 'src/app/models/business.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Subscription } from 'rxjs';
 import { SearchType } from 'src/app/models/type.model';
+import { BusinessActions } from 'src/app/state/business/business.actions';
+import { BusinessSelectors } from 'src/app/state/business/business.selectors';
+import { BusinessResult } from 'src/app/state/business/models/business-results.model';
 
 @Component({
   selector: 'app-search-screen',
   templateUrl: './search-screen.component.html',
   styleUrls: ['./search-screen.component.css'],
 })
-export class SearchScreenComponent implements OnInit {
-  businesses: BusinessesModel[] = [];
+export class SearchScreenComponent implements OnInit, OnDestroy {
+  businessResults!: Map<string, BusinessResult>;
+  subscription = new Subscription();
 
   types: SearchType[] = [
     {
@@ -45,20 +50,29 @@ export class SearchScreenComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.initMockBusinesses();
+    this.store
+      .select(BusinessSelectors.results)
+      .subscribe((results) => this.handleBusinessResults(results));
   }
 
-  initMockBusinesses() {
-    const business: Partial<BusinessesModel> = { name: 'Test' };
-    for (let i = 0; i <= 6; i++) {
-      this.businesses.push(business as BusinessesModel);
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  handleBusinessResults(results: Map<string, BusinessResult>) {
+    this.businessResults = results;
   }
 
   handleOnSearch(searchFormValue: any) {
-    console.log('searchFormValue: ', searchFormValue);
+    this.store.dispatch(
+      new BusinessActions.SearchRequest({
+        name: searchFormValue.name,
+        term: searchFormValue?.types[0],
+        location: searchFormValue?.location,
+      })
+    );
   }
 }

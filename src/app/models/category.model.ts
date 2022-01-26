@@ -1,4 +1,4 @@
 export interface Category {
-    alias: string;
-    title: string;
-  }
+  alias: string;
+  title: string;
+}

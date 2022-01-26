@@ -29,7 +29,7 @@ export class SearchFormComponent implements OnInit {
   initSearchForm() {
     this.searchForm = this.formBuilder.group(
       {
-        localization: ['', Validators.required],
+        location: ['', Validators.required],
         bussinesName: [''],
         types: [[]],
       },
