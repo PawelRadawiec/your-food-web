@@ -1,18 +1,12 @@
-<div class="card" fxLayout="column" fxLayoutAlign="center center">
-  <div><h3>Title</h3></div>
+<div class="card" fxLayout="column" fxLayoutAlign="center start">
   <div>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
+    <h3 class="card-title">{{ business.name }}</h3>
   </div>
   <div>
-    <img
-      class="card-image"
-      src="https://sawepecomcdn.blob.core.windows.net/vb-web-ordering/20.%20Lepieje/promo/560x420_-30__Lepieje%20z%20kapusta%20i%20grzybami.jpg"
-      alt=""
-    />
+    <p>Reviews {{ business.review_count }}</p>
+    <app-star-list [rating]="business.rating"></app-star-list>
+  </div>
+  <div>
+    <img class="card-image" [src]="business.image_url" alt="" />
   </div>
 </div>

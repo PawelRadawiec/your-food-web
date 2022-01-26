@@ -23,6 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BusinessState } from './state/business/business.state';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
+import { StarListComponent } from './components/star-list/star-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     SearchScreenComponent,
     BusinessListComponent,
     BusinessCardComponent,
+    StarListComponent,
   ],
   imports: [
     BrowserModule,

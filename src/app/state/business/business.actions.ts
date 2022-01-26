@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { BusinessSearchResponse } from 'src/app/models/business-search-response.model';
 import { BusinessParams } from './models/business-params.model';
 
