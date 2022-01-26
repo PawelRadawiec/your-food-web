@@ -3,30 +3,14 @@
   (onSearch$)="handleOnSearch($event)"
 ></app-search-form>
 
-<mat-tab-group mat-align-tabs="center">
-  businessResults
-  <div *ngFor="let result of businessResults | keyvalue">
-    <mat-tab [label]="result.value.params.term">
-      <app-business-list [businesses]="result.value.businesses"></app-business-list
-    ></mat-tab>
-  </div>
-
-  <!-- <mat-tab label="Pizza">
-    <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab>
-  <mat-tab label="Burger">
-    <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab>
-  <mat-tab label="Sushi">
-    <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab>
-  <mat-tab label="Steak">
-    <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab>
-  <mat-tab label="Pasta">
-    <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab>
-  <mat-tab label="Fish">
-    <app-business-list [businesses]="businesses"></app-business-list
-  ></mat-tab> -->
-</mat-tab-group>
+<div [@.disabled]="searchLoading">
+  <mat-tab-group mat-align-tabs="center">
+    <div *ngFor="let result of businessResults | keyvalue">
+      <mat-tab [label]="result.value.params.term">
+        <app-business-list
+          [businesses]="result.value.businesses"
+        ></app-business-list
+      ></mat-tab>
+    </div>
+  </mat-tab-group>
+</div>

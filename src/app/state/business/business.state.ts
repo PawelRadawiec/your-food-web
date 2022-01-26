@@ -1,22 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext, Store } from '@ngxs/store';
-import { map } from 'rxjs';
+import {
+  Action,
+  Actions,
+  ofAction,
+  State,
+  StateContext,
+  Store,
+} from '@ngxs/store';
+import { from, map, mergeMap, of, takeLast, takeUntil } from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
-import { BusinessResult } from './models/business-results.model';
 import { BusinessStateModel } from './models/business-state.model';
 import * as _ from 'lodash';
+import { tap } from 'lodash';
 
 @State<BusinessStateModel>({
   name: 'business',
   defaults: {
     results: new Map(),
     selected: null,
+    searchLoading: false,
   },
 })
 @Injectable()
 export class BusinessState {
-  constructor(private store: Store, private businessService: BusinessService) {}
+  constructor(
+    private store: Store,
+    private businessService: BusinessService,
+    private action$: Actions
+  ) {}
 
   @Action(BusinessActions.SearchRequest)
   searchRequest(
@@ -24,11 +36,35 @@ export class BusinessState {
     action: BusinessActions.SearchRequest
   ) {
     return this.businessService.search(action.params).pipe(
-      map((results) => {
+      mergeMap((results) => {
         return this.store.dispatch(
           new BusinessActions.SearchResponse(results, action.params)
         );
       })
+    );
+  }
+
+  @Action(BusinessActions.SearchMultiple)
+  searchMultiple(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.SearchMultiple
+  ) {
+    return from(action.params).pipe(
+      mergeMap((params) => {
+        ctx.patchState({
+          searchLoading: true,
+        });
+        return this.businessService.search(params).pipe(
+          mergeMap((response) => {
+            return this.store.dispatch(
+              new BusinessActions.SearchResponse(response, params)
+            );
+          })
+        );
+      }),
+      takeUntil(
+        this.action$.pipe(ofAction(BusinessActions.CancelMultipleSearch))
+      )
     );
   }
 
@@ -45,6 +81,7 @@ export class BusinessState {
     results.set(action.params.term, businessResult);
     ctx.patchState({
       results,
+      searchLoading: false,
     });
   }
 }

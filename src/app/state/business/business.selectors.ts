@@ -12,4 +12,9 @@ export class BusinessSelectors {
   static selected(state: BusinessStateModel) {
     return state.selected;
   }
+
+  @Selector([BusinessState])
+  static searchLoading(state: BusinessStateModel) {
+    return state.searchLoading;
+  }
 }

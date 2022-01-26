@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 import { SearchType } from 'src/app/models/type.model';
+import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from 'src/app/state/business/business.actions';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 import { BusinessResult } from 'src/app/state/business/models/business-results.model';
@@ -13,6 +14,7 @@ import { BusinessResult } from 'src/app/state/business/models/business-results.m
 })
 export class SearchScreenComponent implements OnInit, OnDestroy {
   businessResults!: Map<string, BusinessResult>;
+  searchLoading!: boolean;
   subscription = new Subscription();
 
   types: SearchType[] = [
@@ -50,12 +52,21 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private businessService: BusinessService) {}
 
   ngOnInit() {
-    this.store
-      .select(BusinessSelectors.results)
-      .subscribe((results) => this.handleBusinessResults(results));
+    this.subscription.add(
+      this.store
+        .select(BusinessSelectors.results)
+        .subscribe((results) => this.handleBusinessResults(results))
+    );
+    this.subscription.add(
+      this.store
+        .select(BusinessSelectors.searchLoading)
+        .subscribe((searchLoading) => {
+          this.searchLoading = searchLoading;
+        })
+    );
   }
 
   ngOnDestroy() {
@@ -67,12 +78,17 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
   }
 
   handleOnSearch(searchFormValue: any) {
-    this.store.dispatch(
-      new BusinessActions.SearchRequest({
-        name: searchFormValue.name,
-        term: searchFormValue?.types[0],
-        location: searchFormValue?.location,
-      })
-    );
+    const types: string[] = searchFormValue?.types;
+    const params = types?.map((type) => ({
+      name: searchFormValue.name,
+      term: type,
+      location: searchFormValue?.location,
+    }));
+    if (this.searchLoading) {
+      this.store.dispatch(new BusinessActions.CancelMultipleSearch());
+    }
+    if (params?.length > 0) {
+      this.store.dispatch(new BusinessActions.SearchMultiple(params));
+    }
   }
 }
