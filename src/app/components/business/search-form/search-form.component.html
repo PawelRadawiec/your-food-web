@@ -1,40 +1,48 @@
-<form
-  [formGroup]="searchForm"
-  (ngSubmit)="onSubmit()"
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="20px"
->
-  <mat-form-field>
-    <mat-label>Localization</mat-label>
-    <input
-      matInput
-      type="text"
-      id="localization"
-      name="Localization"
-      formControlName="localization"
-    />
-    <mat-error *ngIf="searchForm?.get('localization')?.hasError('required')">
-      Required
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input
-      matInput
-      type="text"
-      id="businessName"
-      name="name"
-      formControlName="bussinesName"
-    />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Types</mat-label>
-    <mat-select formControlName="types" multiple>
-      <mat-option *ngFor="let type of types" [value]="type.value">
-        {{ type.name }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-  <button type="submit" mat-raised-button>Search</button>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <mat-form-field>
+      <mat-label>Localization</mat-label>
+      <input
+        matInput
+        type="text"
+        id="location"
+        name="Location"
+        formControlName="location"
+      />
+      <mat-error *ngIf="searchForm?.get('location')?.hasError('required')">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        id="businessName"
+        name="name"
+        formControlName="bussinesName"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Types</mat-label>
+      <mat-select formControlName="types" multiple>
+        <mat-option *ngFor="let type of types" [value]="type.value">
+          {{ type.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button
+      fxFlexAlign="center"
+      type="submit"
+      mat-raised-button
+      class="search-button"
+    >
+      Search
+    </button>
+  </div>
 </form>

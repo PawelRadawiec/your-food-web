@@ -1,0 +1,15 @@
+.card {
+  width: 400px;
+  height: 400px;
+  border-color: black;
+  border-width: 2px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-image {
+  width: 300px;
+  height: 200px;
+}

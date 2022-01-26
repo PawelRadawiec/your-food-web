@@ -16,6 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
+import { BusinessListComponent } from './components/business/business-list/business-list.component';
+import { BusinessCardComponent } from './components/business/business-card/business-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BusinessState } from './state/business/business.state';
+import { NgxsModule } from '@ngxs/store';
+import { HttpClientModule } from '@angular/common/http';
+import { StarListComponent } from './components/star-list/star-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +33,9 @@ import { SearchScreenComponent } from './screens/search-screen/search-screen.com
     HomeComponent,
     SearchFormComponent,
     SearchScreenComponent,
+    BusinessListComponent,
+    BusinessCardComponent,
+    StarListComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +49,13 @@ import { SearchScreenComponent } from './screens/search-screen/search-screen.com
     MatFormFieldModule,
     MatButtonModule,
     MatSelectModule,
+    MatCardModule,
+    MatTabsModule,
+    HttpClientModule,
+    NgxsModule.forRoot([BusinessState], {
+      developmentMode: true,
+    }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

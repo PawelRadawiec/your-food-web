@@ -1,0 +1,12 @@
+<div class="card" fxLayout="column" fxLayoutAlign="center start">
+  <div>
+    <h3 class="card-title">{{ business.name }}</h3>
+  </div>
+  <div>
+    <p>Reviews {{ business.review_count }}</p>
+    <app-star-list [rating]="business.rating"></app-star-list>
+  </div>
+  <div>
+    <img class="card-image" [src]="business.image_url" alt="" />
+  </div>
+</div>
