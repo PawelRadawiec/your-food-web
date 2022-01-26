@@ -7,12 +7,12 @@ import {
   StateContext,
   Store,
 } from '@ngxs/store';
-import { from, map, mergeMap, of, takeLast, takeUntil } from 'rxjs';
+import { from, mergeMap, of, takeLast, takeUntil } from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
 import { BusinessStateModel } from './models/business-state.model';
 import * as _ from 'lodash';
-import { tap } from 'lodash';
+import { BusinessResult } from './models/business-results.model';
 
 @State<BusinessStateModel>({
   name: 'business',
@@ -49,11 +49,11 @@ export class BusinessState {
     ctx: StateContext<BusinessStateModel>,
     action: BusinessActions.SearchMultiple
   ) {
+    ctx.patchState({
+      searchLoading: true,
+    });
     return from(action.params).pipe(
       mergeMap((params) => {
-        ctx.patchState({
-          searchLoading: true,
-        });
         return this.businessService.search(params).pipe(
           mergeMap((response) => {
             return this.store.dispatch(
@@ -64,7 +64,24 @@ export class BusinessState {
       }),
       takeUntil(
         this.action$.pipe(ofAction(BusinessActions.CancelMultipleSearch))
-      )
+      ),
+      takeLast(1),
+      mergeMap(() => {
+        if (ctx.getState().results.size > 0) {
+          const resultMapCopy = ctx.getState().results;
+          const results = new Map<string, BusinessResult>();
+          action.params.forEach((param) => {
+            results.set(param.term, resultMapCopy.get(param.term)!);
+          });
+          ctx.patchState({
+            results,
+          });
+        }
+        ctx.patchState({
+          searchLoading: false,
+        });
+        return of();
+      })
     );
   }
 
@@ -81,7 +98,6 @@ export class BusinessState {
     results.set(action.params.term, businessResult);
     ctx.patchState({
       results,
-      searchLoading: false,
     });
   }
 }
