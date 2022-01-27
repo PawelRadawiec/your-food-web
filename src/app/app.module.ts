@@ -24,6 +24,7 @@ import { BusinessState } from './state/business/business.state';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
 import { StarListComponent } from './components/star-list/star-list.component';
+import { BusinessDetailsScreenComponent } from './screens/business-details-screen/business-details-screen.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { StarListComponent } from './components/star-list/star-list.component';
     BusinessListComponent,
     BusinessCardComponent,
     StarListComponent,
+    BusinessDetailsScreenComponent
   ],
   imports: [
     BrowserModule,

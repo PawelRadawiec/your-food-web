@@ -1,3 +1,4 @@
+import { BusinessDetails } from 'src/app/models/business-details.model';
 import { BusinessSearchResponse } from 'src/app/models/business-search-response.model';
 import { BusinessParams } from './models/business-params.model';
 
@@ -25,5 +26,17 @@ export namespace BusinessActions {
 
   export class CancelMultipleSearch {
     static readonly type = '[Business] CancelMultipleSearch';
+  }
+
+  export class GetById {
+    static readonly type = '[Business]  GetById';
+
+    constructor(public id: string) {}
+  }
+
+  export class GetByIdLoaded {
+    static readonly type = '[Business]  GetByIdLoaded';
+
+    constructor(public businessDetails: BusinessDetails) {}
   }
 }

@@ -1,8 +1,8 @@
-import { BusinessesModel } from "src/app/models/business.model";
-import { BusinessResult } from "./business-results.model";
+import { BusinessDetails } from 'src/app/models/business-details.model';
+import { BusinessResult } from './business-results.model';
 
 export interface BusinessStateModel {
+  details: Partial<BusinessDetails>;
   results: Map<string, BusinessResult>;
-  selected: BusinessesModel | null;
   searchLoading: boolean;
 }

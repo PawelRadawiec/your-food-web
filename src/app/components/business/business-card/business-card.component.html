@@ -1,6 +1,9 @@
 <div class="card" fxLayout="column" fxLayoutAlign="center start">
-  <div>
+  <div fxLayout="row" fxLayoutAlign="start center">
     <h3 class="card-title">{{ business.name }}</h3>
+    <button mat-icon-button (click)="openDetails()">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
   </div>
   <div>
     <p>Reviews {{ business.review_count }}</p>

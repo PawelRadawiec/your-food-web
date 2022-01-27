@@ -13,12 +13,13 @@ import { BusinessActions } from './business.actions';
 import { BusinessStateModel } from './models/business-state.model';
 import * as _ from 'lodash';
 import { BusinessResult } from './models/business-results.model';
+import { BusinessesModel } from 'src/app/models/business.model';
 
 @State<BusinessStateModel>({
   name: 'business',
   defaults: {
+    details: {},
     results: new Map(),
-    selected: null,
     searchLoading: false,
   },
 })
@@ -98,6 +99,25 @@ export class BusinessState {
     results.set(action.params.term, businessResult);
     ctx.patchState({
       results,
+    });
+  }
+
+  @Action(BusinessActions.GetById)
+  getById(ctx: StateContext<BusinessesModel>, action: BusinessActions.GetById) {
+    return this.businessService.getById(action.id).pipe(
+      mergeMap((details) => {
+        return this.store.dispatch(new BusinessActions.GetByIdLoaded(details));
+      })
+    );
+  }
+
+  @Action(BusinessActions.GetByIdLoaded)
+  getByIdLoaded(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.GetByIdLoaded
+  ) {
+    ctx.patchState({
+      details: action.businessDetails,
     });
   }
 }

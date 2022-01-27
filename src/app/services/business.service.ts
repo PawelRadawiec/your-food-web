@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BusinessDetails } from '../models/business-details.model';
 import { BusinessSearchResponse } from '../models/business-search-response.model';
 import { BusinessParams } from '../state/business/models/business-params.model';
 
@@ -18,6 +19,10 @@ export class BusinessService {
         params: this.getHttpParams(params),
       }
     );
+  }
+
+  getById(id: string) {
+    return this.http.get<BusinessDetails>(`${this.baseUrl}/businesses/${id}`);
   }
 
   private getHttpParams(params: BusinessParams) {

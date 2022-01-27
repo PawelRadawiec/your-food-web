@@ -9,12 +9,12 @@ export class BusinessSelectors {
   }
 
   @Selector([BusinessState])
-  static selected(state: BusinessStateModel) {
-    return state.selected;
+  static searchLoading(state: BusinessStateModel) {
+    return state.searchLoading;
   }
 
   @Selector([BusinessState])
-  static searchLoading(state: BusinessStateModel) {
-    return state.searchLoading;
+  static details(state: BusinessStateModel) {
+    return state.details;
   }
 }
