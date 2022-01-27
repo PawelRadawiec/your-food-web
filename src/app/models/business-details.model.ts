@@ -13,7 +13,7 @@ export interface BusinessDetails {
   display_phone: string;
   review_count: string;
   categories: Category[];
-  rating: string;
+  rating: string | number;
   location: Location;
   coordinates: Coordinates;
   photos: string[];
@@ -21,6 +21,17 @@ export interface BusinessDetails {
   hours: BusinessHour[];
   transactions: [];
   special_hours: [];
+}
+
+export interface Location {
+  city: string;
+  country: string;
+  address1: string;
+  address2: string;
+  address3: string;
+  state: string;
+  zip_code: string;
+  display_address: string[];
 }
 
 export interface BusinessHour {

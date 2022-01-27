@@ -1,1 +1,48 @@
-<p>business-details-screen works!</p>
+<div fxLayout="column">
+  <div fxFlex="20">
+    <h2>{{ business.name }}</h2>
+  </div>
+  <div fxFlex="10">
+    <app-star-list [rating]="business.rating ?? 0"></app-star-list>
+  </div>
+  <div class="details-card" fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="40">
+    <div fxLayout="column" fxLayoutAlign="space-around start" fxFlex="30">
+      <div>
+        <p class="card-info">City: {{ business?.location?.city }}</p>
+      </div>
+      <div>
+        <p>Country: {{ business?.location?.country }}</p>
+      </div>
+      <div>
+        <p>State: {{ business?.location?.state }}</p>
+      </div>
+      <div>
+        <p>Zip code: {{ business?.location?.zip_code }}</p>
+      </div>
+      <div>
+        <p>Addreses: {{ addresesDisplay }}</p>
+      </div>
+    </div>
+    <div fxFlex="70">
+      <div *ngFor="let hour of business.hours">
+        <div fxLayout="row wrap" fxLayoutAlign="space-around start">
+          <div *ngFor="let dayInfo of hour.open">
+            <p class="card-day">{{ dayInfo.day | days }}</p>
+            <p>
+              {{ dayInfo.start | hoursSeparator }} -
+              {{ dayInfo.end | hoursSeparator }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="30">
+    <mat-grid-list cols="2" rowHeight="3:1">
+      <mat-grid-tile *ngFor="let photo of business.photos">
+        <img [src]="photo" alt="" />
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
 import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
 import { BusinessListComponent } from './components/business/business-list/business-list.component';
 import { BusinessCardComponent } from './components/business/business-card/business-card.component';
@@ -25,6 +26,9 @@ import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
 import { StarListComponent } from './components/star-list/star-list.component';
 import { BusinessDetailsScreenComponent } from './screens/business-details-screen/business-details-screen.component';
+import { DaysPipe } from './pipes/days.pipe';
+import { HoursSeparatorPipe } from './pipes/hours-separator.pipe';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { BusinessDetailsScreenComponent } from './screens/business-details-scree
     BusinessListComponent,
     BusinessCardComponent,
     StarListComponent,
-    BusinessDetailsScreenComponent
+    BusinessDetailsScreenComponent,
+    DaysPipe,
+    HoursSeparatorPipe,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,9 @@ import { BusinessDetailsScreenComponent } from './screens/business-details-scree
     MatSelectModule,
     MatCardModule,
     MatTabsModule,
+    MatGridListModule,
     HttpClientModule,
+    MatDividerModule,
     NgxsModule.forRoot([BusinessState], {
       developmentMode: true,
     }),

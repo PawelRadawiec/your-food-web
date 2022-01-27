@@ -11,20 +11,27 @@ import * as _ from 'lodash';
   styleUrls: ['./business-details-screen.component.css'],
 })
 export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
-  businessDetails!: Partial<BusinessDetails>;
+  business!: Partial<BusinessDetails>;
   subscription = new Subscription();
+  addresesDisplay!: string;
 
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.subscription.add(
       this.store.select(BusinessSelectors.details).subscribe((details) => {
-        this.businessDetails = _.cloneDeep(details);
+        this.business = _.cloneDeep(details);
       })
     );
+    this.setAddresesDisplay();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  setAddresesDisplay() {
+    const addreses = this.business.location?.display_address.join(', ');
+    this.addresesDisplay = addreses ?? '';
   }
 }

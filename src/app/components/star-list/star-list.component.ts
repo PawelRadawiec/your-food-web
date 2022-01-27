@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./star-list.component.css'],
 })
 export class StarListComponent implements OnInit {
-  @Input() rating!: number;
+  @Input() rating!: number | string;
   starIcons: string[] = [];
 
   constructor() {}
@@ -16,8 +16,12 @@ export class StarListComponent implements OnInit {
   }
 
   initStarIcons() {
-    const isDecimal = this.rating % 1 !== 0;
-    for (let i = 0; i < Math.floor(this.rating); i++) {
+    const rating = Number(this.rating);
+    if (Number.isNaN(rating)) {
+      return;
+    }
+    const isDecimal = rating % 1 !== 0;
+    for (let i = 0; i < Math.floor(rating); i++) {
       this.starIcons.push('star');
     }
     if (isDecimal) {

@@ -28,7 +28,7 @@ app-header {
 
 app-home {
   grid-area: content;
-  background-color: whitesmoke;
+  background-color: white;
   padding: 25px;
 }
 

@@ -1,0 +1,16 @@
+.card-day {
+  font-weight: bold;
+}
+
+.card-info {
+  font-weight: bold;
+}
+
+.details-card {
+  font-weight: bold;
+  border: 1px solid #f8f5f2;
+  border-radius: 5px;
+  background-color: #f8f5f2;
+  padding: 10px;
+  margin: 10px 0 10px 0
+}
