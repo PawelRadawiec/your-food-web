@@ -8,9 +8,16 @@
 
 .details-card {
   font-weight: bold;
-  border: 1px solid #f8f5f2;
+  border: 1px solid #fff5eb;
   border-radius: 5px;
-  background-color: #f8f5f2;
+  background-color: #fff5eb;
   padding: 10px;
-  margin: 10px 0 10px 0
+  margin: 10px 0 10px 0;
+}
+
+.details-image {
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
 }

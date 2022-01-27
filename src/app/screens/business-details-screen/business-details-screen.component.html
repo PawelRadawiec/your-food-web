@@ -15,7 +15,7 @@
     fxFlex="40"
   >
     <div fxLayout="column" fxLayoutAlign="space-around start" fxFlex="30">
-      <div fxLayout="row" fxLayoutAlign="start center" >
+      <div fxLayout="row" fxLayoutAlign="start center">
         <button mat-icon-button (click)="goToPage()">
           <mat-icon>arrow_circle_right</mat-icon>
         </button>
@@ -47,10 +47,10 @@
   </div>
 
   <div fxFlex="30">
-    <mat-grid-list cols="2" rowHeight="3:1">
-      <mat-grid-tile *ngFor="let photo of business.photos">
-        <img [src]="photo" alt="" />
-      </mat-grid-tile>
-    </mat-grid-list>
+    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <div *ngFor="let photo of business.photos">
+        <img class="details-image" [src]="photo" alt="" />
+      </div>
+    </div>
   </div>
 </div>
