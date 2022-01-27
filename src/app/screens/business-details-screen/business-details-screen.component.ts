@@ -30,6 +30,10 @@ export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  goToPage() {
+    window.open(this.business.url, '_blank');
+  }
+
   setAddresesDisplay() {
     const addreses = this.business.location?.display_address.join(', ');
     this.addresesDisplay = addreses ?? '';

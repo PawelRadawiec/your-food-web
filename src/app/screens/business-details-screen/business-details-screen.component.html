@@ -2,30 +2,38 @@
   <div fxFlex="20">
     <h2>{{ business.name }}</h2>
   </div>
-  <div fxFlex="10">
-    <app-star-list [rating]="business.rating ?? 0"></app-star-list>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <app-star-list
+      [rating]="business.rating ?? 0"
+      [count]="business?.review_count"
+    ></app-star-list>
   </div>
-  <div class="details-card" fxLayout="row" fxLayoutAlign="space-evenly start" fxFlex="40">
+  <div
+    class="details-card"
+    fxLayout="row"
+    fxLayoutAlign="space-evenly start"
+    fxFlex="40"
+  >
     <div fxLayout="column" fxLayoutAlign="space-around start" fxFlex="30">
-      <div>
-        <p class="card-info">City: {{ business?.location?.city }}</p>
+      <div fxLayout="row" fxLayoutAlign="start center" >
+        <button mat-icon-button (click)="goToPage()">
+          <mat-icon>arrow_circle_right</mat-icon>
+        </button>
+        <div>Vist page</div>
       </div>
-      <div>
-        <p>Country: {{ business?.location?.country }}</p>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>phone</mat-icon>
+        <div>{{ business.display_phone }}</div>
       </div>
-      <div>
-        <p>State: {{ business?.location?.state }}</p>
-      </div>
-      <div>
-        <p>Zip code: {{ business?.location?.zip_code }}</p>
-      </div>
-      <div>
-        <p>Addreses: {{ addresesDisplay }}</p>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>room</mat-icon>
+        <div>{{ addresesDisplay }}</div>
       </div>
     </div>
     <div fxFlex="70">
       <div *ngFor="let hour of business.hours">
         <div fxLayout="row wrap" fxLayoutAlign="space-around start">
+          <mat-icon>calendar_today</mat-icon>
           <div *ngFor="let dayInfo of hour.open">
             <p class="card-day">{{ dayInfo.day | days }}</p>
             <p>

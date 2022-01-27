@@ -6,8 +6,10 @@
     </button>
   </div>
   <div>
-    <p>Reviews {{ business.review_count }}</p>
-    <app-star-list [rating]="business.rating"></app-star-list>
+    <app-star-list
+      [rating]="business.rating"
+      [count]="business.review_count"
+    ></app-star-list>
   </div>
   <div>
     <img class="card-image" [src]="business.image_url" alt="" />

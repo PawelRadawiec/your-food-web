@@ -1,3 +1,7 @@
 .star-list {
   display: inline;
 }
+
+.count-display {
+  font-weight: bold;
+}
