@@ -11,4 +11,5 @@ export interface BusinessStateModel {
   detailsScreen: Partial<BusinessScreenDetails>;
   results: Map<string, BusinessResult>;
   searchLoading: boolean;
+  errors: any;
 }

@@ -31,6 +31,7 @@ import { HoursSeparatorPipe } from './pipes/hours-separator.pipe';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReviewListComponent } from './components/review-list/review-list.component';
+import { ErrorScreenComponent } from './screens/error-screen/error-screen.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ReviewListComponent } from './components/review-list/review-list.compon
     DaysPipe,
     HoursSeparatorPipe,
     ReviewListComponent,
+    ErrorScreenComponent,
   ],
   imports: [
     BrowserModule,

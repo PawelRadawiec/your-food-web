@@ -39,4 +39,16 @@ export namespace BusinessActions {
     static readonly type = '[Business] DetailsDataLoaded';
     constructor(public data: BusinessDetailsData) {}
   }
+
+  export class RequestError {
+    static readonly type = '[Business] RequestError';
+
+    constructor(public error: any) {}
+  }
+
+  export class ClearErrors {
+    static readonly type = '[Business] ClearErrors';
+
+    constructor() {}
+  }
 }

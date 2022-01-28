@@ -17,4 +17,9 @@ export class BusinessSelectors {
   static detailsScreen(state: BusinessStateModel) {
     return state.detailsScreen;
   }
+
+  @Selector([BusinessState])
+  static requestError(state: BusinessStateModel) {
+    return state.errors;
+  }
 }

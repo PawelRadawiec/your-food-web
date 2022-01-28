@@ -7,13 +7,20 @@ import {
   StateContext,
   Store,
 } from '@ngxs/store';
-import { forkJoin, from, mergeMap, of, takeLast, takeUntil } from 'rxjs';
+import {
+  catchError,
+  forkJoin,
+  from,
+  mergeMap,
+  of,
+  takeLast,
+  takeUntil,
+} from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
 import { BusinessStateModel } from './models/business-state.model';
 import * as _ from 'lodash';
 import { BusinessResult } from './models/business-results.model';
-import { BusinessesModel } from 'src/app/models/business.model';
 
 @State<BusinessStateModel>({
   name: 'business',
@@ -21,6 +28,7 @@ import { BusinessesModel } from 'src/app/models/business.model';
     detailsScreen: {},
     results: new Map(),
     searchLoading: false,
+    errors: null,
   },
 })
 @Injectable()
@@ -41,7 +49,10 @@ export class BusinessState {
         return this.store.dispatch(
           new BusinessActions.SearchResponse(results, action.params)
         );
-      })
+      }),
+      catchError((error) =>
+        this.store.dispatch(new BusinessActions.RequestError(error))
+      )
     );
   }
 
@@ -82,7 +93,10 @@ export class BusinessState {
           searchLoading: false,
         });
         return of();
-      })
+      }),
+      catchError((error) =>
+        this.store.dispatch(new BusinessActions.RequestError(error))
+      )
     );
   }
 
@@ -118,7 +132,10 @@ export class BusinessState {
             businessDetails,
           })
         );
-      })
+      }),
+      catchError((error) =>
+        this.store.dispatch(new BusinessActions.RequestError(error))
+      )
     );
   }
 
@@ -129,6 +146,23 @@ export class BusinessState {
   ) {
     ctx.patchState({
       detailsScreen: action.data,
+    });
+  }
+
+  @Action(BusinessActions.RequestError)
+  requestError(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.RequestError
+  ) {
+    ctx.patchState({
+      errors: action.error,
+    });
+  }
+
+  @Action(BusinessActions.ClearErrors)
+  clearErrors(ctx: StateContext<BusinessStateModel>) {
+    ctx.patchState({
+      errors: null,
     });
   }
 }
