@@ -11,7 +11,7 @@
   <div
     class="details-card"
     fxLayout="row"
-    fxLayoutAlign="space-evenly start"
+    fxLayoutAlign="space-evenly center"
     fxFlex="40"
   >
     <div fxLayout="column" fxLayoutAlign="space-around start" fxFlex="30">
@@ -45,11 +45,24 @@
       </div>
     </div>
   </div>
-
   <div fxFlex="30">
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <div *ngFor="let photo of business.photos">
-        <img class="details-image" [src]="photo" alt="" />
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="space-evenly start"
+      fxLayoutGap="10px"
+    >
+      <google-map [height]="'400px'" [width]="'400px'" [center]="center">
+        <map-marker
+          [position]="marker?.position"
+          [label]="marker?.label"
+          [title]="marker?.title"
+        >
+        </map-marker
+      ></google-map>
+      <div fxLayout="column">
+        <div *ngFor="let photo of business.photos">
+          <img class="details-image" [src]="photo" alt="" />
+        </div>
       </div>
     </div>
   </div>

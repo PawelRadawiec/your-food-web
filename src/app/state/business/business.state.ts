@@ -7,7 +7,7 @@ import {
   StateContext,
   Store,
 } from '@ngxs/store';
-import { from, mergeMap, of, takeLast, takeUntil } from 'rxjs';
+import { forkJoin, from, mergeMap, of, takeLast, takeUntil } from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
 import { BusinessStateModel } from './models/business-state.model';
@@ -18,7 +18,7 @@ import { BusinessesModel } from 'src/app/models/business.model';
 @State<BusinessStateModel>({
   name: 'business',
   defaults: {
-    details: {},
+    detailsScreen: {},
     results: new Map(),
     searchLoading: false,
   },
@@ -102,22 +102,33 @@ export class BusinessState {
     });
   }
 
-  @Action(BusinessActions.GetById)
-  getById(ctx: StateContext<BusinessesModel>, action: BusinessActions.GetById) {
-    return this.businessService.getById(action.id).pipe(
-      mergeMap((details) => {
-        return this.store.dispatch(new BusinessActions.GetByIdLoaded(details));
+  @Action(BusinessActions.GetDetailsData)
+  getBusinessDetailsData(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.GetDetailsData
+  ) {
+    const { id } = action;
+    const businessDetails$ = this.businessService.getById(id);
+    const businessReviews$ = this.businessService.reviews(id);
+    return forkJoin([businessDetails$, businessReviews$]).pipe(
+      mergeMap(([businessDetails, businessReviews]) => {
+        return this.store.dispatch(
+          new BusinessActions.DetailsDataLoaded({
+            reviews: businessReviews.reviews,
+            businessDetails,
+          })
+        );
       })
     );
   }
 
-  @Action(BusinessActions.GetByIdLoaded)
-  getByIdLoaded(
+  @Action(BusinessActions.DetailsDataLoaded)
+  detailsLoaded(
     ctx: StateContext<BusinessStateModel>,
-    action: BusinessActions.GetByIdLoaded
+    action: BusinessActions.DetailsDataLoaded
   ) {
     ctx.patchState({
-      details: action.businessDetails,
+      detailsScreen: action.data,
     });
   }
 }

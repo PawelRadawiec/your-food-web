@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { BusinessDetails } from 'src/app/models/business-details.model';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 import * as _ from 'lodash';
+import { BusinessScreenDetails } from 'src/app/state/business/models/business-state.model';
 
 @Component({
   selector: 'app-business-details-screen',
@@ -12,18 +13,22 @@ import * as _ from 'lodash';
 })
 export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
   business!: Partial<BusinessDetails>;
+  detailsScreen!: Partial<BusinessScreenDetails>;
   subscription = new Subscription();
   addresesDisplay!: string;
+  center!: google.maps.LatLngLiteral;
+  marker!: any;
 
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.subscription.add(
-      this.store.select(BusinessSelectors.details).subscribe((details) => {
-        this.business = _.cloneDeep(details);
-      })
+      this.store
+        .select(BusinessSelectors.detailsScreen)
+        .subscribe((detailsScreen) => {
+          this.handleDetailsScreen(detailsScreen);
+        })
     );
-    this.setAddresesDisplay();
   }
 
   ngOnDestroy() {
@@ -31,7 +36,37 @@ export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
   }
 
   goToPage() {
-    window.open(this.business.url, '_blank');
+    window.open(this.business?.url, '_blank');
+  }
+
+  handleDetailsScreen(detailsScreen: Partial<BusinessScreenDetails>) {
+    this.detailsScreen = _.cloneDeep(detailsScreen);
+    this.business = this.detailsScreen.businessDetails!;
+    this.setAddresesDisplay();
+    this.setCenter();
+    this.setMarker();
+  }
+
+  setMarker() {
+    const latitude = this.business.coordinates?.latitude;
+    const longitude = this.business.coordinates?.longitude;
+    if (!latitude || !longitude) return;
+    this.marker = {
+      position: {
+        lat: latitude,
+        lng: longitude,
+      },
+    };
+  }
+
+  setCenter() {
+    const latitude = this.business.coordinates?.latitude;
+    const longitude = this.business.coordinates?.longitude;
+    if (!latitude || !longitude) return;
+    this.center = {
+      lat: latitude,
+      lng: longitude,
+    };
   }
 
   setAddresesDisplay() {

@@ -14,7 +14,7 @@ export class BusinessSelectors {
   }
 
   @Selector([BusinessState])
-  static details(state: BusinessStateModel) {
-    return state.details;
+  static detailsScreen(state: BusinessStateModel) {
+    return state.detailsScreen;
   }
 }

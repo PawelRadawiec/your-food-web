@@ -29,6 +29,7 @@ import { BusinessDetailsScreenComponent } from './screens/business-details-scree
 import { DaysPipe } from './pipes/days.pipe';
 import { HoursSeparatorPipe } from './pipes/hours-separator.pipe';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatGridListModule,
     HttpClientModule,
     MatDividerModule,
+    GoogleMapsModule,
     NgxsModule.forRoot([BusinessState], {
       developmentMode: true,
     }),

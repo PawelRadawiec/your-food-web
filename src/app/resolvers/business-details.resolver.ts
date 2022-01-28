@@ -10,10 +10,10 @@ export class BusinessDetailsResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const responseOK = this.actions$.pipe(
-      ofActionDispatched(BusinessActions.GetByIdLoaded)
+      ofActionDispatched(BusinessActions.DetailsDataLoaded)
     );
     const { id } = route.params;
-    this.store.dispatch(new BusinessActions.GetById(id));
+    this.store.dispatch(new BusinessActions.GetDetailsData(id));
     // todo - handle error
     return race(responseOK).pipe(first());
   }

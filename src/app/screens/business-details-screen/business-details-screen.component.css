@@ -8,9 +8,9 @@
 
 .details-card {
   font-weight: bold;
-  border: 1px solid #fff5eb;
-  border-radius: 5px;
-  background-color: #fff5eb;
+  border: 1px solid #EFEFEF;
+  border-radius: 10px;
+  background-color: #EFEFEF;
   padding: 10px;
   margin: 10px 0 10px 0;
 }
