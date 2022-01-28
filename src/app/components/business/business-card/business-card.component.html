@@ -1,16 +1,25 @@
-<div class="card" fxLayout="column" fxLayoutAlign="center center">
+<div class="card" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="start center">
     <h3 class="card-title">{{ business.name }}</h3>
     <button mat-icon-button (click)="openDetails()">
       <mat-icon>open_in_new</mat-icon>
     </button>
   </div>
-  <div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
     <app-star-list
       [rating]="business.rating"
       [count]="business.review_count"
     ></app-star-list>
+    <div fxLayout="column">
+      <div
+        style="margin-left: 2px"
+        *ngFor="let category of business.categories"
+      >
+        #{{ category?.title }}
+      </div>
+    </div>
   </div>
+
   <div>
     <img class="card-image" [src]="business.image_url" alt="" />
   </div>

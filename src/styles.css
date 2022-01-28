@@ -23,7 +23,7 @@ app-header {
   font-size: 14px;
   grid-area: header;
   text-align: center;
-  background-color: #065535;
+  background-color: #41B3A3;
 }
 
 app-home {
@@ -34,21 +34,12 @@ app-home {
 
 app-footer {
   grid-area: footer;
-  background-color: #065535;
+  background-color: #41B3A3;
   color: white;
   text-align: center;
   padding: 25px 0;
 }
 
-ul li {
-  color: white;
-}
-ul li a {
-  color: white;
-  text-decoration: none;
-  display: inline-block;
-  margin-bottom: 15px;
-}
 html,
 body {
   height: 100%;
