@@ -1,0 +1,21 @@
+<div fxLayout="column">
+  <div class="review-card" *ngFor="let review of reviews">
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <div>
+        <img class="review-image" [src]="review?.user?.image_url" alt="" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div class="name">
+          {{ review?.user?.name }}
+        </div>
+        <div>
+          {{ review?.time_created | date }}
+        </div>
+        <app-star-list [rating]="review?.rating ?? 0"></app-star-list>
+      </div>
+    </div>
+    <div>
+      {{ review?.text }}
+    </div>
+  </div>
+</div>

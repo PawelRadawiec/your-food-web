@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
 import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
 import { BusinessListComponent } from './components/business/business-list/business-list.component';
 import { BusinessCardComponent } from './components/business/business-card/business-card.component';
@@ -24,6 +25,12 @@ import { BusinessState } from './state/business/business.state';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
 import { StarListComponent } from './components/star-list/star-list.component';
+import { BusinessDetailsScreenComponent } from './screens/business-details-screen/business-details-screen.component';
+import { DaysPipe } from './pipes/days.pipe';
+import { HoursSeparatorPipe } from './pipes/hours-separator.pipe';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { ReviewListComponent } from './components/review-list/review-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +43,10 @@ import { StarListComponent } from './components/star-list/star-list.component';
     BusinessListComponent,
     BusinessCardComponent,
     StarListComponent,
+    BusinessDetailsScreenComponent,
+    DaysPipe,
+    HoursSeparatorPipe,
+    ReviewListComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +62,10 @@ import { StarListComponent } from './components/star-list/star-list.component';
     MatSelectModule,
     MatCardModule,
     MatTabsModule,
+    MatGridListModule,
     HttpClientModule,
+    MatDividerModule,
+    GoogleMapsModule,
     NgxsModule.forRoot([BusinessState], {
       developmentMode: true,
     }),

@@ -1,10 +1,15 @@
-<div class="card" fxLayout="column" fxLayoutAlign="center start">
-  <div>
+<div class="card" fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutAlign="start center">
     <h3 class="card-title">{{ business.name }}</h3>
+    <button mat-icon-button (click)="openDetails()">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
   </div>
   <div>
-    <p>Reviews {{ business.review_count }}</p>
-    <app-star-list [rating]="business.rating"></app-star-list>
+    <app-star-list
+      [rating]="business.rating"
+      [count]="business.review_count"
+    ></app-star-list>
   </div>
   <div>
     <img class="card-image" [src]="business.image_url" alt="" />

@@ -23,7 +23,7 @@ app-header {
   font-size: 14px;
   grid-area: header;
   text-align: center;
-  background-color: #f4511e;
+  background-color: #065535;
 }
 
 app-home {
@@ -34,7 +34,7 @@ app-home {
 
 app-footer {
   grid-area: footer;
-  background-color: #f4511e;
+  background-color: #065535;
   color: white;
   text-align: center;
   padding: 25px 0;

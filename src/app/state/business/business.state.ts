@@ -7,18 +7,19 @@ import {
   StateContext,
   Store,
 } from '@ngxs/store';
-import { from, mergeMap, of, takeLast, takeUntil } from 'rxjs';
+import { forkJoin, from, mergeMap, of, takeLast, takeUntil } from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
 import { BusinessStateModel } from './models/business-state.model';
 import * as _ from 'lodash';
 import { BusinessResult } from './models/business-results.model';
+import { BusinessesModel } from 'src/app/models/business.model';
 
 @State<BusinessStateModel>({
   name: 'business',
   defaults: {
+    detailsScreen: {},
     results: new Map(),
-    selected: null,
     searchLoading: false,
   },
 })
@@ -98,6 +99,36 @@ export class BusinessState {
     results.set(action.params.term, businessResult);
     ctx.patchState({
       results,
+    });
+  }
+
+  @Action(BusinessActions.GetDetailsData)
+  getBusinessDetailsData(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.GetDetailsData
+  ) {
+    const { id } = action;
+    const businessDetails$ = this.businessService.getById(id);
+    const businessReviews$ = this.businessService.reviews(id);
+    return forkJoin([businessDetails$, businessReviews$]).pipe(
+      mergeMap(([businessDetails, businessReviews]) => {
+        return this.store.dispatch(
+          new BusinessActions.DetailsDataLoaded({
+            reviews: businessReviews.reviews,
+            businessDetails,
+          })
+        );
+      })
+    );
+  }
+
+  @Action(BusinessActions.DetailsDataLoaded)
+  detailsLoaded(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.DetailsDataLoaded
+  ) {
+    ctx.patchState({
+      detailsScreen: action.data,
     });
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BusinessesModel } from 'src/app/models/business.model';
 
 @Component({
@@ -9,7 +10,11 @@ import { BusinessesModel } from 'src/app/models/business.model';
 export class BusinessCardComponent implements OnInit {
   @Input() business!: BusinessesModel;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  openDetails() {
+    this.router.navigate([`business/${this.business.id}`]);
+  }
 }
