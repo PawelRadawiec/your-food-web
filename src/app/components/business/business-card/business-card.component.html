@@ -4,6 +4,7 @@
     <button mat-icon-button (click)="openDetails()">
       <mat-icon>open_in_new</mat-icon>
     </button>
+    <mat-spinner *ngIf="loading" [diameter]="20"></mat-spinner>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
     <app-star-list
@@ -24,4 +25,3 @@
     <img class="card-image" [src]="business.image_url" alt="" />
   </div>
 </div>
-Ó

@@ -1,14 +1,11 @@
-import { BusinessDetails } from 'src/app/models/business-details.model';
-import { BusinessReview } from 'src/app/models/business-review.model';
+import { BusinessScreenDetails } from 'src/app/models/business-screen-details.model';
+import { SelectedBusinessPending } from 'src/app/models/selected-business-pending.model';
 import { BusinessResult } from './business-results.model';
 
-export interface BusinessScreenDetails {
-  businessDetails: Partial<BusinessDetails>;
-  reviews: Partial<BusinessReview[]>;
-}
 
 export interface BusinessStateModel {
   detailsScreen: Partial<BusinessScreenDetails>;
+  selectedBusinessPending: Partial<SelectedBusinessPending>;
   results: Map<string, BusinessResult>;
   searchLoading: boolean;
   errors: any;

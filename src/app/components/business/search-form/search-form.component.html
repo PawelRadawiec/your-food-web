@@ -36,13 +36,26 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button
+    <!-- <button
       fxFlexAlign="center"
       type="submit"
       mat-raised-button
       class="search-button"
     >
       Search
+      <mat-spinner [diameter]="20"></mat-spinner>
+    </button> -->
+    <button
+      class="search-button"
+      type="submit"
+      mat-raised-button
+      [disabled]="searchLoading$ | async"
+    >
+      Search
+      <mat-icon>
+        <mat-spinner *ngIf="searchLoading$ | async" [diameter]="20">
+        </mat-spinner
+      ></mat-icon>
     </button>
   </div>
 </form>

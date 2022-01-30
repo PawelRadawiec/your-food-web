@@ -22,4 +22,9 @@ export class BusinessSelectors {
   static requestError(state: BusinessStateModel) {
     return state.errors;
   }
+
+  @Selector([BusinessState])
+  static selectedPending(state: BusinessStateModel) {
+    return state.selectedBusinessPending;
+  }
 }

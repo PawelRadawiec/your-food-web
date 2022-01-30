@@ -9,6 +9,7 @@ import { BusinessesModel } from 'src/app/models/business.model';
 })
 export class BusinessCardComponent implements OnInit {
   @Input() business!: BusinessesModel;
+  @Input() loading?: boolean;
 
   constructor(private router: Router) {}
 

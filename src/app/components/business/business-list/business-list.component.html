@@ -1,5 +1,11 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-around center">
   <div *ngFor="let business of businesses">
-    <app-business-card [business]="business"></app-business-card>
+    <app-business-card
+      [business]="business"
+      [loading]="
+        (selectedPending$ | async)?.pending &&
+        (selectedPending$ | async)?.id === business.id
+      "
+    ></app-business-card>
   </div>
 </div>

@@ -7,6 +7,7 @@ import {
   StateContext,
   Store,
 } from '@ngxs/store';
+import * as _ from 'lodash';
 import {
   catchError,
   forkJoin,
@@ -18,9 +19,8 @@ import {
 } from 'rxjs';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
-import { BusinessStateModel } from './models/business-state.model';
-import * as _ from 'lodash';
 import { BusinessResult } from './models/business-results.model';
+import { BusinessStateModel } from './models/business-state.model';
 
 @State<BusinessStateModel>({
   name: 'business',
@@ -29,6 +29,7 @@ import { BusinessResult } from './models/business-results.model';
     results: new Map(),
     searchLoading: false,
     errors: null,
+    selectedBusinessPending: {},
   },
 })
 @Injectable()
@@ -122,6 +123,9 @@ export class BusinessState {
     action: BusinessActions.GetDetailsData
   ) {
     const { id } = action;
+    ctx.patchState({
+      selectedBusinessPending: { id, pending: true },
+    });
     const businessDetails$ = this.businessService.getById(id);
     const businessReviews$ = this.businessService.reviews(id);
     return forkJoin([businessDetails$, businessReviews$]).pipe(
@@ -146,6 +150,7 @@ export class BusinessState {
   ) {
     ctx.patchState({
       detailsScreen: action.data,
+      selectedBusinessPending: {},
     });
   }
 
@@ -156,6 +161,8 @@ export class BusinessState {
   ) {
     ctx.patchState({
       errors: action.error,
+      selectedBusinessPending: {},
+      searchLoading: false,
     });
   }
 

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { BusinessDetails } from 'src/app/models/business-details.model';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 import * as _ from 'lodash';
-import { BusinessScreenDetails } from 'src/app/state/business/models/business-state.model';
+import { BusinessScreenDetails } from 'src/app/models/business-screen-details.model';
 
 @Component({
   selector: 'app-business-details-screen',

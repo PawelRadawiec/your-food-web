@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { SearchFormValue } from 'src/app/models/search-value.model';
 import { SearchType } from 'src/app/models/type.model';
+import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 
 @Component({
   selector: 'app-search-form',
@@ -9,6 +12,7 @@ import { SearchType } from 'src/app/models/type.model';
   styleUrls: ['./search-form.component.css'],
 })
 export class SearchFormComponent implements OnInit {
+  @Select(BusinessSelectors.searchLoading) searchLoading$?: Observable<boolean>;
   @Input() types: SearchType[] = [];
   @Output() onSearch$ = new EventEmitter<SearchFormValue>();
 

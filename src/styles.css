@@ -24,6 +24,7 @@ app-header {
   grid-area: header;
   text-align: center;
   background-color: #41B3A3;
+  position: sticky;
 }
 
 app-home {

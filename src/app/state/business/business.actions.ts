@@ -1,5 +1,4 @@
 import { BusinessDetailsData } from 'src/app/models/business-details-data.model';
-import { BusinessDetails } from 'src/app/models/business-details.model';
 import { BusinessSearchResponse } from 'src/app/models/business-search-response.model';
 import { BusinessParams } from './models/business-params.model';
 

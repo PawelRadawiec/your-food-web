@@ -32,6 +32,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ErrorScreenComponent } from './screens/error-screen/error-screen.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { ErrorScreenComponent } from './screens/error-screen/error-screen.compon
     MatGridListModule,
     HttpClientModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
     GoogleMapsModule,
     NgxsModule.forRoot([BusinessState], {
       developmentMode: true,
