@@ -14,6 +14,8 @@ import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 export class SearchFormComponent implements OnInit {
   @Select(BusinessSelectors.searchLoading) searchLoading$?: Observable<boolean>;
   @Input() types: SearchType[] = [];
+  @Input() sortBy: SearchType[] = [];
+  @Input() prices: SearchType[] = [];
   @Output() onSearch$ = new EventEmitter<SearchFormValue>();
 
   searchForm!: FormGroup;
@@ -35,7 +37,10 @@ export class SearchFormComponent implements OnInit {
       {
         location: ['', Validators.required],
         bussinesName: [''],
-        types: [[]],
+        types: [[], Validators.required],
+        sortBy: [[]],
+        price: [[]],
+        openNow: [false],
       },
       { updateOn: 'submit' }
     );

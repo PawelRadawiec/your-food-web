@@ -26,35 +26,42 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+      <mat-label>Sort by</mat-label>
+      <mat-select formControlName="sortBy">
+        <mat-option *ngFor="let sort of sortBy" [value]="sort.value">
+          {{ sort.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <mat-select formControlName="price">
+        <mat-option *ngFor="let price of prices" [value]="price.value">
+          {{ price.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Types</mat-label>
       <mat-select formControlName="types" multiple>
         <mat-option *ngFor="let type of types" [value]="type.value">
           {{ type.name }}</mat-option
         >
       </mat-select>
+      <mat-error *ngIf="searchForm?.get('types')?.hasError('required')">
+        Required
+      </mat-error>
     </mat-form-field>
+    <mat-checkbox formControlName="openNow" color="primary">Open now</mat-checkbox>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="center center">
-    <!-- <button
-      fxFlexAlign="center"
-      type="submit"
-      mat-raised-button
-      class="search-button"
-    >
-      Search
-      <mat-spinner [diameter]="20"></mat-spinner>
-    </button> -->
-    <button
-      class="search-button"
-      type="submit"
-      mat-raised-button
-      [disabled]="searchLoading$ | async"
-    >
-      Search
-      <mat-icon>
-        <mat-spinner *ngIf="searchLoading$ | async" [diameter]="20">
-        </mat-spinner
+    <button type="submit" mat-raised-button [disabled]="searchLoading$ | async">
+      <p *ngIf="!(searchLoading$ | async)" style="margin: 0">Search</p>
+      <mat-icon *ngIf="searchLoading$ | async">
+        <mat-spinner [diameter]="20"> </mat-spinner
       ></mat-icon>
     </button>
   </div>

@@ -52,6 +52,44 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
     },
   ];
 
+  sortBy: SearchType[] = [
+    {
+      name: 'Best match',
+      value: 'best_match',
+    },
+    {
+      name: 'Rating',
+      value: 'rating',
+    },
+    {
+      name: 'Review count',
+      value: 'review_count',
+    },
+    {
+      name: 'Distance',
+      value: 'distance',
+    },
+  ];
+
+  prices: SearchType[] = [
+    {
+      name: '$',
+      value: '1',
+    },
+    {
+      name: '$$',
+      value: '2',
+    },
+    {
+      name: '$$$',
+      value: '3',
+    },
+    {
+      name: '$$$$',
+      value: '4',
+    },
+  ];
+
   constructor(private store: Store, private businessService: BusinessService) {}
 
   ngOnInit() {
@@ -83,6 +121,9 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
       name: searchFormValue.name,
       term: type,
       location: searchFormValue?.location,
+      sort_by: searchFormValue?.sortBy,
+      price: searchFormValue?.price,
+      open_now: searchFormValue?.openNow,
     }));
     if (this.searchLoading) {
       this.store.dispatch(new BusinessActions.CancelMultipleSearch());

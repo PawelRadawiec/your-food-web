@@ -33,6 +33,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ErrorScreenComponent } from './screens/error-screen/error-screen.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSelectModule,
     MatCardModule,
     MatTabsModule,
+    MatCheckboxModule,
     MatGridListModule,
     HttpClientModule,
     MatDividerModule,

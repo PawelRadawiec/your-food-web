@@ -6,6 +6,9 @@
     </button>
     <mat-spinner *ngIf="loading" [diameter]="20"></mat-spinner>
   </div>
+  <div>
+    {{business.price}}
+  </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
     <app-star-list
       [rating]="business.rating"
@@ -22,6 +25,14 @@
   </div>
 
   <div>
-    <img class="card-image" [src]="business.image_url" alt="" />
+    <img
+      class="card-image"
+      [src]="
+        business.image_url && business.image_url.length > 0
+          ? business?.image_url
+          : 'assets/images/taxi-89.png'
+      "
+      alt=""
+    />
   </div>
 </div>
