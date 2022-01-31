@@ -5,6 +5,7 @@ import { BusinessDetails } from 'src/app/models/business-details.model';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 import * as _ from 'lodash';
 import { BusinessScreenDetails } from 'src/app/models/business-screen-details.model';
+import { BusinessReview } from 'src/app/models/business-review.model';
 
 @Component({
   selector: 'app-business-details-screen',
@@ -12,12 +13,13 @@ import { BusinessScreenDetails } from 'src/app/models/business-screen-details.mo
   styleUrls: ['./business-details-screen.component.css'],
 })
 export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
-  business!: Partial<BusinessDetails>;
-  detailsScreen!: Partial<BusinessScreenDetails>;
-  subscription = new Subscription();
   addresesDisplay!: string;
+  business!: Partial<BusinessDetails>;
   center!: google.maps.LatLngLiteral;
+  detailsScreen!: Partial<BusinessScreenDetails>;
   marker!: any;
+  reviews: BusinessReview[] = [];
+  subscription = new Subscription();
 
   constructor(private store: Store) {}
 
@@ -42,6 +44,10 @@ export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
   handleDetailsScreen(detailsScreen: Partial<BusinessScreenDetails>) {
     this.detailsScreen = _.cloneDeep(detailsScreen);
     this.business = this.detailsScreen.businessDetails!;
+    const reviews = this.detailsScreen?.reviews;
+    if (reviews && reviews.length > 0) {
+      this.reviews = reviews as BusinessReview[];
+    }
     this.setAddresesDisplay();
     this.setCenter();
     this.setMarker();

@@ -1,26 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { BusinessReview } from 'src/app/models/business-review.model';
-import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 
 @Component({
   selector: 'app-review-list',
   templateUrl: './review-list.component.html',
   styleUrls: ['./review-list.component.css'],
 })
-export class ReviewListComponent implements OnInit, OnDestroy {
-  reviews: Partial<BusinessReview[]> = [];
-  subscription = new Subscription();
+export class ReviewListComponent {
+  @Input() reviews: Partial<BusinessReview[]> = [];
 
-  constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.store.select(BusinessSelectors.detailsScreen).subscribe((details) => {
-      this.reviews = details.reviews ?? [];
-    });
-  }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  constructor() {}
 }
