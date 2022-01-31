@@ -1,5 +1,5 @@
 .card {
-  background-color: #41B3A3;
+  background-color: #41b3a3;
   padding: 15px;
   margin: 10px;
   border-radius: 20px;
@@ -21,4 +21,8 @@
 
 .card-spinner {
   margin: 7px;
+}
+
+.card-category {
+  margin-left: 2px;
 }

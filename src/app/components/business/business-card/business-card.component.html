@@ -1,7 +1,12 @@
 <div class="card" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="start center">
     <h3 class="card-title">{{ business?.name }}</h3>
-    <button *ngIf="!loading" mat-icon-button (click)="openDetails()">
+    <button
+      *ngIf="!loading"
+      id="openDetailsButton"
+      mat-icon-button
+      (click)="openDetails()"
+    >
       <mat-icon>open_in_new</mat-icon>
     </button>
     <mat-spinner
@@ -19,10 +24,7 @@
       [count]="business?.review_count"
     ></app-star-list>
     <div fxLayout="column">
-      <div
-        style="margin-left: 2px"
-        *ngFor="let category of business?.categories"
-      >
+      <div class="card-category" *ngFor="let category of business?.categories">
         #{{ category?.title }}
       </div>
     </div>

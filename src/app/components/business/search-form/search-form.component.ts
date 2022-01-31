@@ -27,7 +27,6 @@ export class SearchFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('this.searchForm: ', this.searchForm);
     if (this.searchForm.valid) {
       this.onSearch$.emit(this.searchForm.value);
     }
