@@ -3,9 +3,9 @@
     <mat-form-field>
       <mat-label>Localization</mat-label>
       <input
+        id="location"
         matInput
         type="text"
-        id="location"
         name="Location"
         formControlName="location"
       />
@@ -45,7 +45,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Types</mat-label>
-      <mat-select formControlName="types" multiple>
+      <mat-select id="types" formControlName="types" multiple>
         <mat-option *ngFor="let type of types" [value]="type.value">
           {{ type.name }}</mat-option
         >
@@ -54,11 +54,13 @@
         Required
       </mat-error>
     </mat-form-field>
-    <mat-checkbox formControlName="openNow" color="primary">Open now</mat-checkbox>
+    <mat-checkbox formControlName="openNow" color="primary"
+      >Open now</mat-checkbox
+    >
   </div>
 
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button type="submit" mat-raised-button [disabled]="searchLoading$ | async">
+    <button id="onSubmitButton" type="submit" mat-raised-button [disabled]="searchLoading$ | async">
       <p *ngIf="!(searchLoading$ | async)" style="margin: 0">Search</p>
       <mat-icon *ngIf="searchLoading$ | async">
         <mat-spinner [diameter]="20"> </mat-spinner

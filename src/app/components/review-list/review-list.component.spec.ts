@@ -32,8 +32,24 @@ describe('ReviewListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have 3 reviews', () => {
+  it('should have 3 review-card', () => {
     const reviewsList = fixture.debugElement.queryAll(By.css('.review-card'));
+    const starsList = fixture.debugElement.queryAll(By.css('app-star-list'));
     expect(reviewsList.length).toBe(3);
+    expect(starsList.length).toBe(3);
+  });
+
+  it('should have 3 review-images', () => {
+    const reviewImages = fixture.debugElement.queryAll(By.css('.review-image'));
+    expect(reviewImages.length).toBe(3);
+  });
+
+  it('should have 3 app-star-list child components', () => {
+    const reviewImages = fixture.debugElement.queryAll(By.css('app-star-list'));
+    expect(reviewImages.length).toBe(3);
+  });
+  it('should have 3 names', () => {
+    const names = fixture.debugElement.queryAll(By.css('.name'));
+    expect(names.length).toBe(3);
   });
 });
