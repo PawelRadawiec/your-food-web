@@ -1,6 +1,7 @@
 import { Selector } from '@ngxs/store';
+import { BusinessStateModel } from 'src/app/models/business-state.model';
 import { BusinessState } from './business.state';
-import { BusinessStateModel } from './models/business-state.model';
+
 
 export class BusinessSelectors {
   @Selector([BusinessState])

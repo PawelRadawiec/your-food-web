@@ -1,6 +1,6 @@
 import { BusinessDetailsData } from 'src/app/models/business-details-data.model';
 import { BusinessSearchResponse } from 'src/app/models/business-search-response.model';
-import { BusinessParams } from './models/business-params.model';
+import { BusinessParams } from '../../models/business-params.model';
 
 export namespace BusinessActions {
   export class SearchMultiple {

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { BusinessesModel } from 'src/app/models/business.model';
 import { SelectedBusinessPending } from 'src/app/models/selected-business-pending.model';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
-import { BusinessState } from 'src/app/state/business/business.state';
 
 @Component({
   selector: 'app-business-list',

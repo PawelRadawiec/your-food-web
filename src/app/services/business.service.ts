@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BusinessDetails } from '../models/business-details.model';
 import { BusinessReviewsResponse } from '../models/business-review.model';
 import { BusinessSearchResponse } from '../models/business-search-response.model';
-import { BusinessParams } from '../state/business/models/business-params.model';
+import { BusinessParams } from '../models/business-params.model';
 
 @Injectable({
   providedIn: 'root',

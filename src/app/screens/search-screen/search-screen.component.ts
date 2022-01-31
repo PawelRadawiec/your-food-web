@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
+import { BusinessResult } from 'src/app/models/business-results.model';
 import { SearchType } from 'src/app/models/type.model';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from 'src/app/state/business/business.actions';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
-import { BusinessResult } from 'src/app/state/business/models/business-results.model';
 
 @Component({
   selector: 'app-search-screen',

@@ -17,10 +17,10 @@ import {
   takeLast,
   takeUntil,
 } from 'rxjs';
+import { BusinessResult } from 'src/app/models/business-results.model';
+import { BusinessStateModel } from 'src/app/models/business-state.model';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
-import { BusinessResult } from './models/business-results.model';
-import { BusinessStateModel } from './models/business-state.model';
 
 @State<BusinessStateModel>({
   name: 'business',
