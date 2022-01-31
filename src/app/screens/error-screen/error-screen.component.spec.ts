@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NgxsModule, Store } from '@ngxs/store';
+import { BusinessState } from 'src/app/state/business/business.state';
 
 import { ErrorScreenComponent } from './error-screen.component';
 
@@ -8,9 +12,14 @@ describe('ErrorScreenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ErrorScreenComponent ]
-    })
-    .compileComponents();
+      imports: [
+        NgxsModule.forRoot([BusinessState]),
+        HttpClientModule,
+        RouterTestingModule
+      ],
+      declarations: [ErrorScreenComponent],
+      providers: [Store],
+    }).compileComponents();
   });
 
   beforeEach(() => {
