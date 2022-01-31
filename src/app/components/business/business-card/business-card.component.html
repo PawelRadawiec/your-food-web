@@ -1,13 +1,17 @@
 <div class="card" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="start center">
     <h3 class="card-title">{{ business.name }}</h3>
-    <button mat-icon-button (click)="openDetails()">
+    <button *ngIf="!loading" mat-icon-button (click)="openDetails()">
       <mat-icon>open_in_new</mat-icon>
     </button>
-    <mat-spinner *ngIf="loading" [diameter]="20"></mat-spinner>
+    <mat-spinner
+      *ngIf="loading"
+      class="card-spinner"
+      [diameter]="20"
+    ></mat-spinner>
   </div>
   <div>
-    {{business.price}}
+    {{ business.price }}
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
     <app-star-list
