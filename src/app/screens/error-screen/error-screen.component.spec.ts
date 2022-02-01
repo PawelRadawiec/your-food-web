@@ -65,5 +65,4 @@ describe('ErrorScreenComponent', () => {
     component.ngOnInit();
     expect(selectSpy).toHaveBeenCalled();
   });
-
 });

@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Subscription } from 'rxjs';
 import { BusinessDetails } from 'src/app/models/business-details.model';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 import * as _ from 'lodash';
@@ -12,36 +11,27 @@ import { BusinessReview } from 'src/app/models/business-review.model';
   templateUrl: './business-details-screen.component.html',
   styleUrls: ['./business-details-screen.component.css'],
 })
-export class BusinessDetailsScreenComponent implements OnInit, OnDestroy {
+export class BusinessDetailsScreenComponent implements OnInit {
   addresesDisplay!: string;
   business!: Partial<BusinessDetails>;
   center!: google.maps.LatLngLiteral;
   detailsScreen!: Partial<BusinessScreenDetails>;
   marker!: any;
   reviews: BusinessReview[] = [];
-  subscription = new Subscription();
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.subscription.add(
-      this.store
-        .select(BusinessSelectors.detailsScreen)
-        .subscribe((detailsScreen) => {
-          this.handleDetailsScreen(detailsScreen);
-        })
+    this.setDetailsScreenData(
+      this.store.selectSnapshot(BusinessSelectors.detailsScreen)
     );
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   goToPage() {
     window.open(this.business?.url, '_blank');
   }
 
-  handleDetailsScreen(detailsScreen: Partial<BusinessScreenDetails>) {
+  setDetailsScreenData(detailsScreen: Partial<BusinessScreenDetails>) {
     this.detailsScreen = _.cloneDeep(detailsScreen);
     this.business = this.detailsScreen.businessDetails!;
     const reviews = this.detailsScreen?.reviews;
