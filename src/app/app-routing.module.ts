@@ -5,7 +5,7 @@ import { BusinessDetailsScreenComponent } from './screens/business-details-scree
 import { ErrorScreenComponent } from './screens/error-screen/error-screen.component';
 import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'search',
     component: SearchScreenComponent,
