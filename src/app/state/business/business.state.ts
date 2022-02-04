@@ -1,3 +1,4 @@
+import { Xtb } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import {
   Action,
@@ -8,6 +9,7 @@ import {
   Store,
 } from '@ngxs/store';
 import * as _ from 'lodash';
+import { reject } from 'lodash';
 import {
   catchError,
   forkJoin,
@@ -19,6 +21,7 @@ import {
 } from 'rxjs';
 import { BusinessResult } from 'src/app/models/business-results.model';
 import { BusinessStateModel } from 'src/app/models/business-state.model';
+import { BusinessesModel } from 'src/app/models/business.model';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from './business.actions';
 
@@ -106,12 +109,23 @@ export class BusinessState {
     ctx: StateContext<BusinessStateModel>,
     action: BusinessActions.SearchResponse
   ) {
+    const term = action.params.term;
     const results = _.cloneDeep(ctx.getState().results);
+    let pageIndexBusinesses = results.get(term)?.businessesByPageIndex;
+    if (!pageIndexBusinesses) {
+      pageIndexBusinesses = new Map<number, BusinessesModel[]>();
+    }
+    pageIndexBusinesses.set(
+      action.params.pageIndex!,
+      action.resluts.businesses
+    );
     const businessResult = {
       params: action.params,
       businesses: action.resluts.businesses,
+      total: action.resluts.total,
+      businessesByPageIndex: pageIndexBusinesses,
     };
-    results.set(action.params.term, businessResult);
+    results.set(term, businessResult);
     ctx.patchState({
       results,
     });
@@ -152,6 +166,70 @@ export class BusinessState {
       detailsScreen: action.data,
       selectedBusinessPending: {},
     });
+  }
+
+  @Action(BusinessActions.HandlePaginationEvent)
+  handlePageEvent(
+    _: StateContext<BusinessStateModel>,
+    action: BusinessActions.HandlePaginationEvent
+  ) {
+    const { pageEvent, params } = action;
+    const currentPageIndex = pageEvent.pageIndex;
+    const paramsPageIndex = params.pageIndex;
+    if (paramsPageIndex && currentPageIndex < paramsPageIndex) {
+      this.store.dispatch(
+        new BusinessActions.BusinessPaginationBack(
+          params.term,
+          pageEvent.pageIndex
+        )
+      );
+    } else {
+      params.offset += 6;
+      params.pageIndex = pageEvent.pageIndex;
+      this.store.dispatch(new BusinessActions.BusinessPaginationNext(params));
+    }
+  }
+
+  @Action(BusinessActions.BusinessPaginationNext)
+  businessPaginationNext(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.BusinessPaginationNext
+  ) {
+    ctx.patchState({ searchLoading: true });
+    return this.businessService.search(action.params).pipe(
+      mergeMap((response) => {
+        ctx.patchState({
+          searchLoading: false,
+        });
+        return this.store.dispatch(
+          new BusinessActions.SearchResponse(response, action.params)
+        );
+      }),
+      catchError((reject) =>
+        this.store.dispatch(new BusinessActions.RequestError(reject))
+      )
+    );
+  }
+
+  @Action(BusinessActions.BusinessPaginationBack)
+  setBusinessesByPageIndex(
+    ctx: StateContext<BusinessStateModel>,
+    action: BusinessActions.BusinessPaginationBack
+  ) {
+    const { pageIndex, type } = action;
+    const results = _.cloneDeep(ctx.getState().results);
+    const businessResult = results.get(type);
+    const businessesByPageIndex =
+      businessResult?.businessesByPageIndex.get(pageIndex);
+    if (businessesByPageIndex && businessResult) {
+      businessResult.params.pageIndex = pageIndex;
+      businessResult.params.offset -= 6;
+      businessResult.businesses = businessesByPageIndex;
+      results.set(action.type, businessResult);
+      ctx.patchState({
+        results,
+      });
+    }
   }
 
   @Action(BusinessActions.RequestError)

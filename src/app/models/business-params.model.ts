@@ -1,5 +1,7 @@
 export interface BusinessParams {
     name: string;
     term: string;
-    location: string
+    offset: number;
+    location: string;
+    pageIndex?: number;
   }

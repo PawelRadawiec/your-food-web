@@ -9,10 +9,20 @@
   <mat-tab-group mat-align-tabs="center">
     <div *ngFor="let result of businessResults | keyvalue">
       <mat-tab [label]="result.value.params.term">
+        <mat-paginator
+          hidePageSize
+          [disabled]="searchLoading$ | async"
+          [length]="result.value.total"
+          [pageSize]="pageSize"
+          [pageIndex]="result.value.params.pageIndex"
+          (page)="pageHandle($event, result.value.params)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
         <app-business-list
           [businesses]="result.value.businesses"
-        ></app-business-list
-      ></mat-tab>
+        ></app-business-list>
+      </mat-tab>
     </div>
   </mat-tab-group>
 </div>

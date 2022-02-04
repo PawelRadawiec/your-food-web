@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Subscription } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { BusinessParams } from 'src/app/models/business-params.model';
 import { BusinessResult } from 'src/app/models/business-results.model';
 import { SearchType } from 'src/app/models/type.model';
 import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from 'src/app/state/business/business.actions';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-search-screen',
@@ -13,9 +16,12 @@ import { BusinessSelectors } from 'src/app/state/business/business.selectors';
   styleUrls: ['./search-screen.component.css'],
 })
 export class SearchScreenComponent implements OnInit, OnDestroy {
+  @Select(BusinessSelectors.searchLoading) searchLoading$!: Observable<boolean>;
   businessResults!: Map<string, BusinessResult>;
   searchLoading!: boolean;
   subscription = new Subscription();
+
+  pageSize = 6;
 
   types: SearchType[] = [
     {
@@ -112,7 +118,7 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
   }
 
   handleBusinessResults(results: Map<string, BusinessResult>) {
-    this.businessResults = results;
+    this.businessResults = _.cloneDeep(results);
   }
 
   handleOnSearch(searchFormValue: any) {
@@ -124,6 +130,9 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
       sort_by: searchFormValue?.sortBy,
       price: searchFormValue?.price,
       open_now: searchFormValue?.openNow,
+      offset: 6,
+      limit: 6,
+      pageIndex: 0,
     }));
     if (this.searchLoading) {
       this.store.dispatch(new BusinessActions.CancelMultipleSearch());
@@ -131,5 +140,11 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
     if (params?.length > 0) {
       this.store.dispatch(new BusinessActions.SearchMultiple(params));
     }
+  }
+
+  pageHandle(event: PageEvent, params: BusinessParams) {
+    this.store.dispatch(
+      new BusinessActions.HandlePaginationEvent(event, params)
+    );
   }
 }
