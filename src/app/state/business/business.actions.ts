@@ -1,6 +1,5 @@
 import { PageEvent } from '@angular/material/paginator';
 import { BusinessDetailsData } from 'src/app/models/business-details-data.model';
-import { BusinessResult } from 'src/app/models/business-results.model';
 import { BusinessSearchResponse } from 'src/app/models/business-search-response.model';
 import { BusinessParams } from '../../models/business-params.model';
 

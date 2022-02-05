@@ -7,7 +7,7 @@
 
 <div [@.disabled]="searchLoading">
   <mat-tab-group mat-align-tabs="center">
-    <div *ngFor="let result of businessResults | keyvalue">
+    <div *ngFor="let result of businessResults | keyvalue; trackby: trackByFn">
       <mat-tab [label]="result.value.params.term">
         <mat-paginator
           hidePageSize

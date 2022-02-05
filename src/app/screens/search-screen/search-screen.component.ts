@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { BusinessParams } from 'src/app/models/business-params.model';
 import { BusinessResult } from 'src/app/models/business-results.model';
 import { SearchType } from 'src/app/models/type.model';
-import { BusinessService } from 'src/app/services/business.service';
 import { BusinessActions } from 'src/app/state/business/business.actions';
 import { BusinessSelectors } from 'src/app/state/business/business.selectors';
 import * as _ from 'lodash';
@@ -96,7 +95,7 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(private store: Store, private businessService: BusinessService) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.subscription.add(
@@ -122,18 +121,7 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
   }
 
   handleOnSearch(searchFormValue: any) {
-    const types: string[] = searchFormValue?.types;
-    const params = types?.map((type) => ({
-      name: searchFormValue.name,
-      term: type,
-      location: searchFormValue?.location,
-      sort_by: searchFormValue?.sortBy,
-      price: searchFormValue?.price,
-      open_now: searchFormValue?.openNow,
-      offset: 6,
-      limit: 6,
-      pageIndex: 0,
-    }));
+    const params = this.createParams(searchFormValue?.types, searchFormValue);
     if (this.searchLoading) {
       this.store.dispatch(new BusinessActions.CancelMultipleSearch());
     }
@@ -146,5 +134,23 @@ export class SearchScreenComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       new BusinessActions.HandlePaginationEvent(event, params)
     );
+  }
+
+  createParams(types: string[], searchFormValue: any) {
+    return types?.map((type) => ({
+      name: searchFormValue.name,
+      term: type,
+      location: searchFormValue?.location,
+      sort_by: searchFormValue?.sortBy,
+      price: searchFormValue?.price,
+      open_now: searchFormValue?.openNow,
+      offset: 6,
+      limit: 6,
+      pageIndex: 0,
+    }));
+  }
+
+  trackByFn(index: any, item: BusinessResult) {
+    return item.params.term;
   }
 }
