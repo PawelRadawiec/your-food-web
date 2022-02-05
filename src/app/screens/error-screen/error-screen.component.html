@@ -1,0 +1,9 @@
+<div fxLayout="column wrap" fxLayoutAlign="center center">
+  <div><h2>Something went wrong</h2></div>
+  <div *ngIf="errors">
+    <h3>Server error: {{ errors?.status }} {{ errors?.statusText }}</h3>
+  </div>
+  <div>
+    <img class="error-image" src="assets/images/went-wrong.png" alt="image" />
+  </div>
+</div>

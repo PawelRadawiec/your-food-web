@@ -1,9 +1,9 @@
 {
   "name": "your-food-web",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -11,13 +11,20 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.1.0",
+    "@angular/cdk": "^13.1.3",
     "@angular/common": "~13.1.0",
     "@angular/compiler": "~13.1.0",
     "@angular/core": "~13.1.0",
+    "@angular/flex-layout": "^13.0.0-beta.36",
     "@angular/forms": "~13.1.0",
+    "@angular/google-maps": "^13.2.0",
+    "@angular/material": "^13.1.3",
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "@material/card": "^13.0.0",
+    "@ngxs/store": "^3.7.3",
+    "lodash": "^4.17.21",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -26,7 +33,9 @@
     "@angular-devkit/build-angular": "~13.1.4",
     "@angular/cli": "~13.1.4",
     "@angular/compiler-cli": "~13.1.0",
+    "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~3.10.0",
+    "@types/lodash": "^4.14.178",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
@@ -35,5 +44,8 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.5.2"
-  }
+  },
+  "assets": [
+    "src/assets"
+  ]
 }

@@ -1,0 +1,23 @@
+.card-day {
+  font-weight: bold;
+}
+
+.card-info {
+  font-weight: bold;
+}
+
+.details-card {
+  font-weight: bold;
+  border: 1px solid #EFEFEF;
+  border-radius: 10px;
+  background-color: #EFEFEF;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.details-image {
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}

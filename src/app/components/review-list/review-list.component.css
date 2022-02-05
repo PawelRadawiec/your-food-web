@@ -1,0 +1,19 @@
+.name {
+  font-weight: bold;
+}
+
+.review-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+.review-card {
+  font-weight: bold;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  background-color: #efefef;
+  padding: 10px;
+  margin-bottom: 10px;
+}

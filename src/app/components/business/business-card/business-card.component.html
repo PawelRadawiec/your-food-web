@@ -1,0 +1,44 @@
+<div class="card" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h3 class="card-title">{{ business?.name }}</h3>
+    <button
+      *ngIf="!loading"
+      id="openDetailsButton"
+      mat-icon-button
+      (click)="openDetails()"
+    >
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+    <mat-spinner
+      *ngIf="loading"
+      class="card-spinner"
+      [diameter]="20"
+    ></mat-spinner>
+  </div>
+  <div>
+    {{ business?.price }}
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <app-star-list
+      [rating]="business?.rating ?? 0"
+      [count]="business?.review_count"
+    ></app-star-list>
+    <div fxLayout="column">
+      <div class="card-category" *ngFor="let category of business?.categories">
+        #{{ category?.title }}
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <img
+      class="card-image"
+      [src]="
+        business?.image_url && business.image_url.length > 0
+          ? business?.image_url
+          : 'assets/images/taxi-89.png'
+      "
+      alt=""
+    />
+  </div>
+</div>

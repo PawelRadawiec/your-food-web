@@ -1,0 +1,5 @@
+.error-image {
+  width: min(50vw, 500px);
+  object-fit: cover;
+  border-radius: 10px;
+}

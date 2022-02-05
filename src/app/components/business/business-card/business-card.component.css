@@ -1,0 +1,28 @@
+.card {
+  background-color: #41b3a3;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0px 0px 24px -5px rgba(66, 68, 90, 0.7);
+  font-weight: bold;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.card-image {
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-spinner {
+  margin: 7px;
+}
+
+.card-category {
+  margin-left: 2px;
+}

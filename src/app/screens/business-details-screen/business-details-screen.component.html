@@ -1,0 +1,70 @@
+<div fxLayout="column">
+  <div fxFlex="20">
+    <h2>{{ business?.name }}</h2>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <app-star-list
+      [rating]="business?.rating ?? 0"
+      [count]="business?.review_count"
+    ></app-star-list>
+  </div>
+  <div
+    class="details-card"
+    fxLayout="row"
+    fxLayoutAlign="space-evenly center"
+    fxFlex="40"
+  >
+    <div fxLayout="column" fxLayoutAlign="space-around start" fxFlex="30">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button (click)="goToPage()">
+          <mat-icon>arrow_circle_right</mat-icon>
+        </button>
+        <div>Vist page</div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>phone</mat-icon>
+        <div>{{ business?.display_phone }}</div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>room</mat-icon>
+        <div>{{ addresesDisplay }}</div>
+      </div>
+    </div>
+    <div fxFlex="70">
+      <div *ngFor="let hour of business?.hours">
+        <div fxLayout="row wrap" fxLayoutAlign="space-around start">
+          <mat-icon>calendar_today</mat-icon>
+          <div *ngFor="let dayInfo of hour?.open">
+            <p class="card-day">{{ dayInfo.day | days }}</p>
+            <p>
+              {{ dayInfo.start | hoursSeparator }} -
+              {{ dayInfo.end | hoursSeparator }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="30">
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="space-evenly start"
+      fxLayoutGap="10px"
+    >
+      <google-map [height]="'400px'" [width]="'400px'" [center]="center">
+        <map-marker
+          [position]="marker?.position"
+          [label]="marker?.label"
+          [title]="marker?.title"
+        >
+        </map-marker
+      ></google-map>
+      <div fxLayout="column">
+        <div *ngFor="let photo of business?.photos">
+          <img class="details-image" [src]="photo" alt="" />
+        </div>
+      </div>
+      <app-review-list [reviews]="reviews"></app-review-list>
+    </div>
+  </div>
+</div>
