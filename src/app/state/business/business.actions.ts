@@ -1,3 +1,4 @@
+import { PageEvent } from '@angular/material/paginator';
 import { BusinessDetailsData } from 'src/app/models/business-details-data.model';
 import { BusinessSearchResponse } from 'src/app/models/business-search-response.model';
 import { BusinessParams } from '../../models/business-params.model';
@@ -43,6 +44,21 @@ export namespace BusinessActions {
     static readonly type = '[Business] RequestError';
 
     constructor(public error: any) {}
+  }
+
+  export class HandlePaginationEvent {
+    static readonly type = '[Business] HandlePaginationEvent';
+    constructor(public pageEvent: PageEvent, public params: BusinessParams) {}
+  }
+
+  export class BusinessPaginationNext {
+    static readonly type = '[Business] BusinessPaginationNext';
+    constructor(public params: BusinessParams) {}
+  }
+
+  export class BusinessPaginationBack {
+    static readonly type = '[Business] BusinessPaginationBack';
+    constructor(public type: string, public pageIndex: number) {}
   }
 
   export class ClearErrors {

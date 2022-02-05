@@ -1,7 +1,9 @@
-import { BusinessesModel } from "src/app/models/business.model";
-import { BusinessParams } from "./business-params.model";
+import { BusinessesModel } from 'src/app/models/business.model';
+import { BusinessParams } from './business-params.model';
 
 export interface BusinessResult {
   params: BusinessParams;
   businesses: BusinessesModel[];
+  total: number;
+  businessesByPageIndex: Map<number, BusinessesModel[]>;
 }

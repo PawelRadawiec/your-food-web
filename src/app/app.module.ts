@@ -34,6 +34,7 @@ import { ReviewListComponent } from './components/review-list/review-list.compon
 import { ErrorScreenComponent } from './screens/error-screen/error-screen.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatGridListModule,
     HttpClientModule,
     MatDividerModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     GoogleMapsModule,
     NgxsModule.forRoot([BusinessState], {
