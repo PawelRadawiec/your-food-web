@@ -14,6 +14,7 @@ export class BusinessService {
   constructor(private http: HttpClient) {}
 
   search(params: BusinessParams) {
+    console.log('http: ', this.http);
     return this.http.get<BusinessSearchResponse>(
       `${this.baseUrl}/businesses/search`,
       {

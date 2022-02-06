@@ -1,4 +1,3 @@
-import { Xtb } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import {
   Action,
@@ -9,7 +8,6 @@ import {
   Store,
 } from '@ngxs/store';
 import * as _ from 'lodash';
-import { reject } from 'lodash';
 import {
   catchError,
   forkJoin,
@@ -45,7 +43,7 @@ export class BusinessState {
 
   @Action(BusinessActions.SearchRequest)
   searchRequest(
-    ctx: StateContext<BusinessStateModel>,
+    _: StateContext<BusinessStateModel>,
     action: BusinessActions.SearchRequest
   ) {
     return this.businessService.search(action.params).pipe(
@@ -110,8 +108,8 @@ export class BusinessState {
     action: BusinessActions.SearchResponse
   ) {
     const term = action.params.term;
-    const results = _.cloneDeep(ctx.getState().results);
-    let pageIndexBusinesses = results.get(term)?.businessesByPageIndex;
+    const results = _.cloneDeep(ctx.getState()?.results);
+    let pageIndexBusinesses = results?.get(term)?.businessesByPageIndex;
     if (!pageIndexBusinesses) {
       pageIndexBusinesses = new Map<number, BusinessesModel[]>();
     }
@@ -125,7 +123,7 @@ export class BusinessState {
       total: action.resluts.total,
       businessesByPageIndex: pageIndexBusinesses,
     };
-    results.set(term, businessResult);
+    results?.set(term, businessResult);
     ctx.patchState({
       results,
     });
