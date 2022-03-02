@@ -1,35 +1,4 @@
-<div class="card" fxLayout="column">
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <h3 class="card-title">{{ business?.name }}</h3>
-    <button
-      *ngIf="!loading"
-      id="openDetailsButton"
-      mat-icon-button
-      (click)="openDetails()"
-    >
-      <mat-icon>open_in_new</mat-icon>
-    </button>
-    <mat-spinner
-      *ngIf="loading"
-      class="card-spinner"
-      [diameter]="20"
-    ></mat-spinner>
-  </div>
-  <div>
-    {{ business?.price }}
-  </div>
-  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-    <app-star-list
-      [rating]="business?.rating ?? 0"
-      [count]="business?.review_count"
-    ></app-star-list>
-    <div fxLayout="column">
-      <div class="card-category" *ngFor="let category of business?.categories">
-        #{{ category?.title }}
-      </div>
-    </div>
-  </div>
-
+<div class="card">
   <div>
     <img
       class="card-image"
@@ -40,5 +9,39 @@
       "
       alt=""
     />
+  </div>
+  <div class="card-content">
+    <div class="card-info">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+        <p class="card-category" *ngFor="let category of business?.categories">
+          {{ category?.title }}
+        </p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <h3 class="card-title">{{ business?.name }}</h3>
+        <button
+          *ngIf="!loading"
+          id="openDetailsButton"
+          mat-icon-button
+          (click)="openDetails()"
+        >
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+        <mat-spinner
+          *ngIf="loading"
+          class="card-spinner"
+          [diameter]="20"
+        ></mat-spinner>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <app-star-list
+        [rating]="business?.rating ?? 0"
+        [count]="business?.review_count"
+      ></app-star-list>
+      <p class="card-price">
+        {{ business?.price }}
+      </p>
+    </div>
   </div>
 </div>

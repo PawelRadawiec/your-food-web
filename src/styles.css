@@ -1,51 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-  margin: 0;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,600&display=swap");
+
+* {
   padding: 0;
-  font-family: sans-serif;
-  background-color: #e4f0ff;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
 }
 
 .container {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 1fr 6fr 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header header"
-    "content content content"
+    "sidebar content aside"
     "footer footer footer";
   height: 100vh;
 }
 
 app-header {
-  color: white;
+  background-color: #12b886;
+  color: #000;
   font-size: 14px;
   grid-area: header;
   text-align: center;
-  background-color: #41B3A3;
   position: sticky;
 }
 
 app-home {
   grid-area: content;
-  background-color: whitesmoke;
-  padding: 25px;
+  background-color: #fff;
 }
 
 app-footer {
+  background-color: #12b886;
   grid-area: footer;
-  background-color: #41B3A3;
-  color: white;
+  color: #000;
   text-align: center;
   padding: 25px 0;
 }
 
-html,
-body {
-  height: 100%;
-}
-body {
+.mat-typography p {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
