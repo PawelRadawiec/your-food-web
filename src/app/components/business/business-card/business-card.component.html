@@ -1,15 +1,13 @@
 <div class="card">
-  <div>
-    <img
-      class="card-image"
-      [src]="
-        business?.image_url && business.image_url.length > 0
-          ? business?.image_url
-          : 'assets/images/taxi-89.png'
-      "
-      alt=""
-    />
-  </div>
+  <img
+    class="card-image"
+    [src]="
+      business?.image_url && business.image_url.length > 0
+        ? business?.image_url
+        : 'assets/images/taxi-89.png'
+    "
+    alt=""
+  />
   <div class="card-content">
     <div class="card-info">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">

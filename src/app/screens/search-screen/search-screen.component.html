@@ -1,28 +1,32 @@
-<app-search-form
-  [types]="types"
-  [sortBy]="sortBy"
-  [prices]="prices"
-  (onSearch$)="handleOnSearch($event)"
-></app-search-form>
+<div>
+  <app-search-form
+    [types]="types"
+    [sortBy]="sortBy"
+    [prices]="prices"
+    (onSearch$)="handleOnSearch($event)"
+  ></app-search-form>
 
-<div [@.disabled]="searchLoading">
-  <mat-tab-group mat-align-tabs="center">
-    <div *ngFor="let result of businessResults | keyvalue; trackby: trackByFn">
-      <mat-tab [label]="result.value.params.term">
-        <mat-paginator
-          hidePageSize
-          [disabled]="searchLoading$ | async"
-          [length]="result.value.total"
-          [pageSize]="pageSize"
-          [pageIndex]="result.value.params.pageIndex"
-          (page)="pageHandle($event, result.value.params)"
-          aria-label="Select page"
-        >
-        </mat-paginator>
-        <app-business-list
-          [businesses]="result.value.businesses"
-        ></app-business-list>
-      </mat-tab>
-    </div>
-  </mat-tab-group>
+  <div [@.disabled]="searchLoading">
+    <mat-tab-group mat-align-tabs="center">
+      <div
+        *ngFor="let result of businessResults | keyvalue; trackby: trackByFn"
+      >
+        <mat-tab [label]="result.value.params.term">
+          <mat-paginator
+            hidePageSize
+            [disabled]="searchLoading$ | async"
+            [length]="result.value.total"
+            [pageSize]="pageSize"
+            [pageIndex]="result.value.params.pageIndex"
+            (page)="pageHandle($event, result.value.params)"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+          <app-business-list
+            [businesses]="result.value.businesses"
+          ></app-business-list>
+        </mat-tab>
+      </div>
+    </mat-tab-group>
+  </div>
 </div>

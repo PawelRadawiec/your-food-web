@@ -12,6 +12,7 @@ body {
   font-family: "Rubik", sans-serif;
   line-height: 1;
   font-weight: 400;
+  background-color: #f8f9fa;
 }
 
 .container {
@@ -33,7 +34,7 @@ app-header {
 
 app-home {
   grid-area: content;
-  background-color: #fff;
+  background-color: #f8f9fa;
 }
 
 app-footer {
@@ -44,7 +45,18 @@ app-footer {
   padding: 25px 0;
 }
 
+sidebar {
+  grid-area: sidebar;
+  background-color: #f8f9fa;
+}
+
 .mat-typography p {
   margin: 0;
 }
+
+mat-paginator {
+  background-color: #f8f9fa;
+  color: #000;
+}
+
 
