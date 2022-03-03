@@ -1,26 +1,27 @@
 <header>
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="row" fxFlex="20" fxLayoutAlign="space-evenly center">
-      <h3 class="header-title">Your Food</h3>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
       <mat-icon
+        class="header-logo-icon"
         routerLink="/home"
         aria-hidden="false"
         aria-label="Example home icon"
-        >home</mat-icon
+        >fastfood</mat-icon
       >
+      <h2 class="header-title">Your Food</h2>
     </div>
-    <div fxLayout="row" fxFlex="20" fxLayoutAlign="space-evenly center">
-      <mat-icon
-        routerLink="/search"
-        aria-hidden="false"
-        aria-label="Example home icon"
-        >search</mat-icon
-      >
+    <div class="header-right" fxLayoutAlign="space-between center" fxLayoutGap="24px">
       <mat-icon
         routerLink="/home"
         aria-hidden="false"
         aria-label="Example home icon"
         >account_circle</mat-icon
+      >
+      <mat-icon
+        routerLink="/home"
+        aria-hidden="false"
+        aria-label="Example home icon"
+        >login</mat-icon
       >
     </div>
   </div>

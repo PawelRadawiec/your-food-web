@@ -26,12 +26,9 @@ body {
 }
 
 app-header {
+  grid-area: header;
   background-color: #12b886;
   color: #000;
-  font-size: 14px;
-  grid-area: header;
-  text-align: center;
-  position: sticky;
 }
 
 app-home {
@@ -40,8 +37,8 @@ app-home {
 }
 
 app-footer {
-  background-color: #12b886;
   grid-area: footer;
+  background-color: #12b886;
   color: #000;
   text-align: center;
   padding: 25px 0;
