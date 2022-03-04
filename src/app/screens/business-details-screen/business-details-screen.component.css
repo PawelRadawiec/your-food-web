@@ -1,3 +1,28 @@
+.details {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 1fr 2fr 5fr auto;
+}
+
+.details--header {
+  grid-column: 1 / -1;
+  align-self: center;
+}
+
+.details-card {
+  grid-column: 1 / -1;
+  font-weight: bold;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.details-map {
+  align-self: center;
+}
+
 .card-day {
   font-weight: bold;
 }
@@ -6,18 +31,19 @@
   font-weight: bold;
 }
 
-.details-card {
-  font-weight: bold;
-  border: 1px solid #EFEFEF;
-  border-radius: 10px;
-  background-color: #EFEFEF;
-  padding: 10px;
-  margin: 10px 0 10px 0;
-}
-
 .details-image {
-  width: 350px;
+  width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.reviews {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
 }
