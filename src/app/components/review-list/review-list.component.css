@@ -1,19 +1,33 @@
-.name {
-  font-weight: bold;
-}
-
-.review-image {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 50px;
-}
-
 .review-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2.5fr 1fr;
+
   font-weight: bold;
   border: 1px solid #fff;
   border-radius: 10px;
   background-color: #fff;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.review-card__name {
+  font-weight: 600;
+  color: #868e96;
+}
+
+.review-card__image{
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+.review-card__stars {
+  justify-self: end;
+}
+
+.review-card__text {
+  grid-column: 1 / -1;
 }
