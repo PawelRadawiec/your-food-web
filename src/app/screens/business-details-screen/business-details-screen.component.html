@@ -9,60 +9,27 @@
     </div>
   </div>
 
-  <div class="details-card">
-    <div class="details-card__info">
-      <div class="details-card__info__item">
-        <mat-icon (click)="goToPage()">arrow_circle_right</mat-icon>
-        <p>Vist page</p>
-      </div>
+  <app-details-card
+    class="details__card"
+    [business]="business"
+  ></app-details-card>
 
-      <div class="details-card__info__item">
-        <mat-icon>phone</mat-icon>
-        <p>{{ business?.display_phone }}</p>
-      </div>
-
-      <div class="details-card__info__item">
-        <mat-icon>room</mat-icon>
-        <p>{{ addresesDisplay }}</p>
-      </div>
-    </div>
-    <div>
-      <ng-container *ngFor="let hour of business?.hours">
-        <div class="details-card__hours">
-          <div class="details-card__hour" *ngFor="let dayInfo of hour?.open">
-            <p class="day">{{ dayInfo.day | days }}</p>
-            <div fxLayout="row" fxLayoutAlign="center center" >
-              <mat-icon>lock_open</mat-icon>
-              <p class="hour">
-                {{ dayInfo.start | hoursSeparator }}
-              </p>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="center center" >
-              <mat-icon>lock</mat-icon>
-              <p class="hour">
-                {{ dayInfo.end | hoursSeparator }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-  <div class="details-map">
-    <google-map width="100%" [center]="center">
-      <map-marker
-        [position]="marker?.position"
-        [label]="marker?.label"
-        [title]="marker?.title"
-      >
-      </map-marker
-    ></google-map>
-  </div>
+  <google-map class="details__map" width="100%" [center]="center">
+    <map-marker
+      [position]="marker?.position"
+      [label]="marker?.label"
+      [title]="marker?.title"
+    >
+    </map-marker
+  ></google-map>
 
   <div fxLayout="column">
     <div *ngFor="let photo of business?.photos">
-      <img class="details-image" [src]="photo" alt="" />
+      <img class="details__image" [src]="photo" alt="" />
     </div>
   </div>
-  <app-review-list class="reviews" [reviews]="reviews"></app-review-list>
+  <app-review-list
+    class="details__reviews"
+    [reviews]="reviews"
+  ></app-review-list>
 </div>

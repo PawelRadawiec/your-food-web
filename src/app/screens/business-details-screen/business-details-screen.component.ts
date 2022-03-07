@@ -12,7 +12,6 @@ import { BusinessReview } from 'src/app/models/business-review.model';
   styleUrls: ['./business-details-screen.component.css'],
 })
 export class BusinessDetailsScreenComponent implements OnInit {
-  addresesDisplay!: string;
   business!: Partial<BusinessDetails>;
   center!: google.maps.LatLngLiteral;
   detailsScreen!: Partial<BusinessScreenDetails>;
@@ -27,10 +26,6 @@ export class BusinessDetailsScreenComponent implements OnInit {
     );
   }
 
-  goToPage() {
-    window.open(this.business?.url, '_blank');
-  }
-
   setDetailsScreenData(detailsScreen: Partial<BusinessScreenDetails>) {
     this.detailsScreen = _.cloneDeep(detailsScreen);
     this.business = this.detailsScreen.businessDetails!;
@@ -38,7 +33,6 @@ export class BusinessDetailsScreenComponent implements OnInit {
     if (reviews && reviews.length > 0) {
       this.reviews = reviews as BusinessReview[];
     }
-    this.setAddresesDisplay();
     this.setCenter();
     this.setMarker();
   }
@@ -65,8 +59,4 @@ export class BusinessDetailsScreenComponent implements OnInit {
     };
   }
 
-  setAddresesDisplay() {
-    const addreses = this.business.location?.display_address.join(', ');
-    this.addresesDisplay = addreses ?? '';
-  }
 }

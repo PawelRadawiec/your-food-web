@@ -1,0 +1,67 @@
+.details-card {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+
+  font-weight: bold;
+  border: 1px solid #fff;
+  border-radius: 12px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.details-card__info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.details-card__info__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-card__hours {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+
+  column-gap: 16px;
+  row-gap: 16px;
+}
+
+.details-card__hour {
+  background-color: #12b886;
+  border-radius: 12px;
+  justify-self: center;
+  width: 100%;
+  padding: 8px;
+}
+
+.day {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.hour {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .details-card {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .card-day,
+  .card-info {
+    font-size: 14px;
+  }
+}

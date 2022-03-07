@@ -35,6 +35,7 @@ import { ErrorScreenComponent } from './screens/error-screen/error-screen.compon
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DetailsCardComponent } from './components/details-card/details-card.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HoursSeparatorPipe,
     ReviewListComponent,
     ErrorScreenComponent,
+    DetailsCardComponent,
   ],
   imports: [
     BrowserModule,
