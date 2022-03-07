@@ -1,5 +1,5 @@
 <div class="details">
-  <div class="details--header">
+  <div class="details__header">
     <h1>{{ business?.name }}</h1>
     <div fxLayout="row" fxLayoutAlign="start center">
       <app-star-list
@@ -10,39 +10,46 @@
   </div>
 
   <div class="details-card">
-    <div fxLayout="column" fxLayoutAlign="space-around start" fxFlex="30">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <button mat-icon-button (click)="goToPage()">
-          <mat-icon>arrow_circle_right</mat-icon>
-        </button>
-        <div>Vist page</div>
+    <div class="details-card__info">
+      <div class="details-card__info__item">
+        <mat-icon (click)="goToPage()">arrow_circle_right</mat-icon>
+        <p>Vist page</p>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
+
+      <div class="details-card__info__item">
         <mat-icon>phone</mat-icon>
-        <div>{{ business?.display_phone }}</div>
+        <p>{{ business?.display_phone }}</p>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
+
+      <div class="details-card__info__item">
         <mat-icon>room</mat-icon>
-        <div>{{ addresesDisplay }}</div>
+        <p>{{ addresesDisplay }}</p>
       </div>
     </div>
     <div>
-      <div *ngFor="let hour of business?.hours">
-        <div fxLayout="row wrap" fxLayoutAlign="space-around start">
-          <mat-icon>calendar_today</mat-icon>
-          <div *ngFor="let dayInfo of hour?.open">
-            <p class="card-day">{{ dayInfo.day | days }}</p>
-            <p>
-              {{ dayInfo.start | hoursSeparator }} -
-              {{ dayInfo.end | hoursSeparator }}
-            </p>
+      <ng-container *ngFor="let hour of business?.hours">
+        <div class="details-card__hours">
+          <div class="details-card__hour" *ngFor="let dayInfo of hour?.open">
+            <p class="day">{{ dayInfo.day | days }}</p>
+            <div fxLayout="row" fxLayoutAlign="center center" >
+              <mat-icon>lock_open</mat-icon>
+              <p class="hour">
+                {{ dayInfo.start | hoursSeparator }}
+              </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" >
+              <mat-icon>lock</mat-icon>
+              <p class="hour">
+                {{ dayInfo.end | hoursSeparator }}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div class="details-map">
-    <google-map  width="100%" [center]="center">
+    <google-map width="100%" [center]="center">
       <map-marker
         [position]="marker?.position"
         [label]="marker?.label"
