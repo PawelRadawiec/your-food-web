@@ -35,11 +35,27 @@
 }
 
 .details-card__hour {
+  position: relative;
   background-color: #12b886;
   border-radius: 12px;
   justify-self: center;
   width: 100%;
   padding: 8px;
+}
+
+.details-card__hour--open {
+  position: absolute;
+  top: -20px;
+  right: -16px;
+  border-radius: 8px;
+
+  color: #112A46;
+  background-color: #E8A87C;
+  padding: 6px;
+}
+
+.details-card__hour--color {
+  background-color: #38d9a9;
 }
 
 .day {
