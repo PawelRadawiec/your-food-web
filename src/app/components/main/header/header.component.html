@@ -11,6 +11,8 @@
       <h2 class="header-title">Your Food</h2>
     </div>
     <div class="header-right" fxLayoutAlign="space-between center" fxLayoutGap="24px">
+      <button mat-icon-button (click)="setLanguage('pl')">PL</button>
+      <button mat-icon-button (click)="setLanguage('en')">EN</button>
       <mat-icon
         routerLink="/home"
         aria-hidden="false"

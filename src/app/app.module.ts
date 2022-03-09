@@ -23,7 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BusinessState } from './state/business/business.state';
 import { NgxsModule } from '@ngxs/store';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StarListComponent } from './components/star-list/star-list.component';
 import { BusinessDetailsScreenComponent } from './screens/business-details-screen/business-details-screen.component';
 import { DaysPipe } from './pipes/days.pipe';
@@ -36,6 +36,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DetailsCardComponent } from './components/details-card/details-card.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,18 @@ import { DetailsCardComponent } from './components/details-card/details-card.com
     NgxsModule.forRoot([BusinessState], {
       developmentMode: true,
     }),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

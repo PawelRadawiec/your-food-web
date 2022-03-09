@@ -2,7 +2,7 @@
   <div class="details-card__info">
     <div class="details-card__info__item">
       <mat-icon class="details-card__icon" (click)="goToPage()">arrow_circle_right</mat-icon>
-      <p>Vist page</p>
+      <p>{{'YOUR_FOOD.VISIT_PAGE' | translate}}</p>
     </div>
 
     <div class="details-card__info__item">
@@ -43,7 +43,7 @@
             *ngIf="displayOpen && dayInfo.day === currentDayIndex"
             class="details-card__hour--open"
           >
-            Open
+            {{'YOUR_FOOD.OPEN' | translate}}
           </p>
         </div>
       </div>
