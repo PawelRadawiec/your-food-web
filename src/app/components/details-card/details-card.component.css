@@ -43,6 +43,10 @@
   padding: 8px;
 }
 
+.details-card__hour mat-icon {
+  color: #000;
+}
+
 .details-card__hour--open {
   position: absolute;
   top: -20px;

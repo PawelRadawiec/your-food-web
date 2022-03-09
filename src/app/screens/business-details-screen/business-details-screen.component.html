@@ -1,6 +1,6 @@
 <div class="details">
   <div class="details__header">
-    <h1>{{ business?.name }}</h1>
+    <h1 class="details__header__name">{{ business?.name }}</h1>
     <div fxLayout="row" fxLayoutAlign="start center">
       <app-star-list
         [rating]="business?.rating ?? 0"

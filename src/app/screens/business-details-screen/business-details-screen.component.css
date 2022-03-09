@@ -11,6 +11,11 @@
   align-self: center;
 }
 
+.details__header__name {
+  font-size: 48px;
+  font-weight: 600;
+}
+
 .details__card {
   grid-column: 1 / -1;
 }
