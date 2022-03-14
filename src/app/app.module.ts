@@ -38,6 +38,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { DetailsCardComponent } from './components/details-card/details-card.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatFormFieldModule,
     MatButtonModule,
     MatSelectModule,
+    MatMenuModule,
     MatCardModule,
     MatTabsModule,
     MatCheckboxModule,
@@ -83,11 +85,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     }),
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
-  })
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   bootstrap: [AppComponent],
 })

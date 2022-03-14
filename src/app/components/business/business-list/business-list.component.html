@@ -1,6 +1,7 @@
 <div class="business-card-list">
   <div *ngFor="let business of businesses">
     <app-business-card
+      class="business-card-list__item"
       [business]="business"
       [loading]="
         (selectedPending$ | async)?.pending &&

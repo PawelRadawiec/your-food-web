@@ -7,6 +7,10 @@
   margin: 0 24px;
 }
 
+.business-card-list__item {
+  align-self: center;
+}
+
 @media (max-width: 800px) {
   .business-card-list {
     grid-template-columns: repeat(2, 1fr);
