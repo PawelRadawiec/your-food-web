@@ -1,6 +1,6 @@
 <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <mat-label>Localization</mat-label>
+    <mat-label>{{'YOUR_FOOD.LOCALIZATION' | translate}}</mat-label>
     <input
       id="location"
       matInput
@@ -9,12 +9,12 @@
       formControlName="location"
     />
     <mat-error *ngIf="searchForm?.get('location')?.hasError('required')">
-      Required
+      {{'YOUR_FOOD.REQUIRED' | translate}}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Name</mat-label>
+    <mat-label> {{'YOUR_FOOD.NAME' | translate}}</mat-label>
     <input
       matInput
       type="text"
@@ -25,11 +25,11 @@
   </mat-form-field>
 
   <mat-checkbox class="open-now" formControlName="openNow" color="primary"
-    >Open now</mat-checkbox
+    > {{'YOUR_FOOD.OPEN_NOW' | translate}}</mat-checkbox
   >
 
   <mat-form-field appearance="fill">
-    <mat-label>Sort by</mat-label>
+    <mat-label> {{'YOUR_FOOD.SORT_BY' | translate}}</mat-label>
     <mat-select formControlName="sortBy">
       <mat-option *ngFor="let sort of sortBy" [value]="sort.value">
         {{ sort.name }}</mat-option
@@ -38,7 +38,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Price</mat-label>
+    <mat-label> {{'YOUR_FOOD.PRICE' | translate}}</mat-label>
     <mat-select formControlName="price">
       <mat-option *ngFor="let price of prices" [value]="price.value">
         {{ price.name }}</mat-option
@@ -47,14 +47,14 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Types</mat-label>
+    <mat-label> {{'YOUR_FOOD.TYPES' | translate}}</mat-label>
     <mat-select id="types" formControlName="types" multiple>
       <mat-option *ngFor="let type of types" [value]="type.value">
         {{ type.name }}</mat-option
       >
     </mat-select>
     <mat-error *ngIf="searchForm?.get('types')?.hasError('required')">
-      Required
+      {{'YOUR_FOOD.REQUIRED' | translate}}
     </mat-error>
   </mat-form-field>
 
@@ -65,7 +65,7 @@
       mat-raised-button
       [disabled]="searchLoading$ | async"
     >
-      <p *ngIf="!(searchLoading$ | async)" style="margin: 0">Search</p>
+      <p *ngIf="!(searchLoading$ | async)" style="margin: 0"> {{'YOUR_FOOD.SEARCH' | translate}}</p>
       <mat-icon *ngIf="searchLoading$ | async">
         <mat-spinner [diameter]="20"> </mat-spinner
       ></mat-icon>
